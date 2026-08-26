@@ -16,6 +16,18 @@
   # Run x86_64 binaries via qemu.
   boot.binfmt.emulatedSystems = ["x86_64-linux"];
 
+  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "nvme" "usbhid" "sr_mod" ];
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "ext4";
+  };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/boot";
+    fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
+  };
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
+
   #---------------------------------------------------------------------
   # Nix
   #---------------------------------------------------------------------
