@@ -26,6 +26,7 @@
   environment.systemPackages = with pkgs; [
     git
     vim
+    tmux
   ];
 
   system.stateVersion = "25.11";
