@@ -5,6 +5,7 @@
     bat
     fzf
     jq
+    yq
     tree
     watch
   ];
