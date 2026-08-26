@@ -1,0 +1,14 @@
+# Minimal zsh config. home-manager (programs.zsh) handles aliases,
+# completion, autosuggestions, and syntax highlighting for us; this file is
+# for the rest of the interactive-shell behavior.
+
+setopt AUTO_CD                 # `foo/` cd's into foo
+setopt HIST_IGNORE_DUPS        # don't record consecutive dupes
+setopt HIST_IGNORE_SPACE       # leading space keeps a command out of history
+setopt SHARE_HISTORY           # share history across sessions
+
+HISTSIZE=100000
+SAVEHIST=100000
+
+# Emacs-style line editing.
+bindkey -e

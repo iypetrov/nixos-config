@@ -20,7 +20,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.iypetrov = import ./home-manager.nix;
+          home-manager.users.iypetrov = import ./users/iypetrov/home-manager.nix;
         }
       ];
     };

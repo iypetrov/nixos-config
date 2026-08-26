@@ -115,16 +115,17 @@
   users.users.iypetrov = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+    shell = pkgs.zsh;
     initialPassword = "123";
   };
+
+  # zsh is our login shell (per-user config lives in home-manager). It must be
+  # enabled at the system level for it to be a valid login shell.
+  programs.zsh.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
 
   environment.systemPackages = with pkgs; [
-    # dev-setup
-    vim
-    tmux
-
     # standard
     git
     wget
@@ -132,6 +133,10 @@
     gnumake
     killall
     xclip
+
+    # GUI / i3
+    ghostty
+    rofi
   ];
 
   # Leave at your first install's release

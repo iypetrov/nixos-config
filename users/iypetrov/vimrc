@@ -1,0 +1,45 @@
+" vimrc — sane defaults. home-manager (programs.vim) reads this via extraConfig.
+
+set nocompatible
+syntax on
+filetype plugin indent on
+
+" UI
+set number
+set relativenumber
+set ruler
+set showcmd
+set laststatus=2
+set scrolloff=5
+set signcolumn=yes
+
+" Search
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+" Indentation (4-space, expandtab)
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set autoindent
+set smartindent
+
+" Behavior
+set hidden
+set mouse=a
+set clipboard=unnamedplus
+set backspace=indent,eol,start
+set wildmenu
+set splitright
+set splitbelow
+
+" No swap/backup clutter
+set noswapfile
+set nobackup
+set nowritebackup
+
+" Clear search highlight with <leader> + space (leader = \ by default)
+nnoremap <leader><space> :nohlsearch<CR>
