@@ -30,27 +30,29 @@ switch:
 .PHONY: vm/bootstrap0
 vm/bootstrap0:
 	@ssh $(SSH_OPTIONS) -p$(NIXPORT) root@$(NIXADDR) " \
+		# https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning-UEFI \
 		parted /dev/sda -- mklabel gpt; \
 		parted /dev/sda -- mkpart primary 512MB -8GB; \
 		parted /dev/sda -- mkpart primary linux-swap -8GB 100\%; \
 		parted /dev/sda -- mkpart ESP fat32 1MB 512MB; \
 		parted /dev/sda -- set 3 esp on; \
 		sleep 1; \
+		# https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning-formatting \
 		mkfs.ext4 -L nixos /dev/sda1; \
 		mkswap -L swap /dev/sda2; \
 		mkfs.fat -F 32 -n boot /dev/sda3; \
 		sleep 1; \
+		# https://nixos.org/manual/nixos/stable/#sec-installation-manual-installing \
 		mount /dev/disk/by-label/nixos /mnt; \
 		mkdir -p /mnt/boot; \
 		mount /dev/disk/by-label/boot /mnt/boot; \
 		nixos-generate-config --root /mnt; \
-		sed --in-place '/system\.stateVersion = .*/a \
+		sed -i '/system\.stateVersion = .*/a \
 			nix.package = pkgs.nixVersions.latest;\n \
-			nix.extraOptions = \"experimental-features = nix-command flakes\";\n \
+			users.users.root.initialPassword = \"root\";\n \
   			services.openssh.enable = true;\n \
 			services.openssh.settings.PasswordAuthentication = true;\n \
 			services.openssh.settings.PermitRootLogin = \"yes\";\n \
-			users.users.root.initialPassword = \"root\";\n \
 		' /mnt/etc/nixos/configuration.nix; \
 		nixos-install --no-root-passwd && reboot; \
 	"
