@@ -39,9 +39,12 @@
   networking.hostName = "vm-aarch64";
   networking.useDHCP = false;
   # TODO: confirm the interface name inside the VM with `ip link`
-  networking.interfaces.ens160.useDHCP = true;
+  networking.interfaces.enp2s0.useDHCP = true;
   # We're in a NAT'd VM, so the firewall just gets in the way
   networking.firewall.enable = false;
+
+  services.resolved.enable = true;
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 
   # Enable the OpenSSH daemon
   services.openssh.enable = true;

@@ -27,22 +27,24 @@ switch:
 # Bootstrap a brand new VM. The VM should have NixOS ISO on the CD drive.
 # Set the password of the root user to "root". After installing NixOS, you must
 # reboot and set the root password for the next step.
+#
+# See the links below for more information:
+# - https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning-UEFI
+# - https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning-formatting
+# - https://nixos.org/manual/nixos/stable/#sec-installation-manual-installing
 .PHONY: vm/bootstrap0
 vm/bootstrap0:
 	@ssh $(SSH_OPTIONS) -p$(NIXPORT) root@$(NIXADDR) " \
-		# https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning-UEFI \
 		parted /dev/sda -- mklabel gpt; \
 		parted /dev/sda -- mkpart primary 512MB -8GB; \
 		parted /dev/sda -- mkpart primary linux-swap -8GB 100\%; \
 		parted /dev/sda -- mkpart ESP fat32 1MB 512MB; \
 		parted /dev/sda -- set 3 esp on; \
 		sleep 1; \
-		# https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning-formatting \
 		mkfs.ext4 -L nixos /dev/sda1; \
 		mkswap -L swap /dev/sda2; \
 		mkfs.fat -F 32 -n boot /dev/sda3; \
 		sleep 1; \
-		# https://nixos.org/manual/nixos/stable/#sec-installation-manual-installing \
 		mount /dev/disk/by-label/nixos /mnt; \
 		mkdir -p /mnt/boot; \
 		mount /dev/disk/by-label/boot /mnt/boot; \
