@@ -11,7 +11,6 @@ let
       hash = "sha256-wFthuVpD0tZdh76xmDs1cNKzQVtOSg69X4nPwp0Xt+U=";
     };
   };
-
   vim-markdown-preview = pkgs.vimUtils.buildVimPlugin {
     name = "vim-markdown-preview";
     src = pkgs.fetchFromGitHub {
@@ -22,9 +21,8 @@ let
     };
   };
 
-  # Every file in ./scripts is linked into ~/.local/bin as an executable, so a
-  # new script is picked up just by dropping it in that directory. ~/.local/bin
-  # is added to PATH below via home.sessionPath.
+  # Every file in ./scripts is linked into ~/.local/bin as an executable.
+  home.sessionPath = [ "$HOME/.local/bin" ];
   scriptFiles = builtins.attrNames (builtins.readDir ./scripts);
   binScripts = builtins.listToAttrs (map (name: {
     name = ".local/bin/${name}";
@@ -36,17 +34,9 @@ let
 in {
   # Home Manager state version. Leave at your first-install release.
   home.stateVersion = "26.05";
-
   xdg.enable = true;
-
-  #---------------------------------------------------------------------
-  # Packages
-  #---------------------------------------------------------------------
-
-  # User-facing CLI tools. Project-specific tooling should come from
-  # per-project flakes + direnv rather than living here.
   home.packages = with pkgs; [
-    # common
+    # Common utils.
     bat
     fzf
     jq
@@ -55,63 +45,45 @@ in {
     watch
     silver-searcher
 
-    # light tooling ported from the macOS shell
+    # Specific for me.
     terraform
     kubectl
     docker-compose
-    lazygit                # tmux `prefix g`
-    k9s                    # tmux `prefix 9`
-    gh                     # used by tmux-sessionizer.sh (gh repo sync)
+    lazygit
+    k9s
+    gh
 
-    # LSP servers used by vim-lsp (see vimrc)
+    # LSP servers
     gopls
     typescript-language-server
-    clang-tools                        # provides clangd
+    clang-tools
     python3Packages.jedi-language-server
     terraform-ls
 
-    # GUI terminal (config lives in ./ghostty.linux, linked below)
+    # GUI terminal.
     ghostty
     rofi
 
-    # i3 support tools referenced by ./i3
+    # i3 tools.
     dex                    # XDG autostart (dex --autostart)
     xss-lock               # lock on suspend
     i3lock                 # screen locker
     networkmanagerapplet   # nm-applet tray
   ];
 
-  #---------------------------------------------------------------------
-  # Env vars and dotfiles
-  #---------------------------------------------------------------------
-
-  home.sessionVariables = {
-    LANG = "en_US.UTF-8";
-    LC_ALL = "en_US.UTF-8";
-    EDITOR = "vim";
-    PAGER = "less -FirSwX";
-  };
-
-  # Custom scripts (from ./scripts) live in ~/.local/bin; put it on PATH.
-  home.sessionPath = [ "$HOME/.local/bin" ];
+  #-----------------------------------------------------------------------------
+  # Programs                                                                   #
+  #-----------------------------------------------------------------------------
 
   # i3 is enabled as a system-level window manager in configuration.nix; its
   # per-user config is a plain dotfile we link into place here.
   xdg.configFile."i3/config".source = ./i3;
-
-  # ghostty terminal config (raw file, mitchellh-style).
+  # Ghostty terminal config.
   xdg.configFile."ghostty/config".source = ./ghostty.linux;
-
-  # Powerlevel10k prompt config (~/.p10k.zsh) plus every script in ./scripts,
-  # linked into ~/.local/bin as executables (see binScripts in the let block).
+  # Powerlevel10k prompt config.
   home.file = {
     ".p10k.zsh".source = ./p10k.zsh;
   } // binScripts;
-
-  #---------------------------------------------------------------------
-  # Programs
-  #---------------------------------------------------------------------
-
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -123,22 +95,17 @@ in {
       src = pkgs.zsh-powerlevel10k;
       file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
     }];
-    # initContent (not initExtra) — renamed in home-manager 25.05+.
     initContent = builtins.readFile ./zshrc;
   };
-
-  # Shell history search. --disable-up-arrow keeps the up key as plain history.
+  # Shell history search.
   programs.atuin = {
     enable = true;
     flags = [ "--disable-up-arrow" ];
   };
-
   programs.vim = {
     enable = true;
     defaultEditor = true;
-    # Plugins are managed by Nix (not vim-plug); the vim-plug bootstrap has been
-    # removed from ./vimrc. zazen and vim-markdown-preview aren't in nixpkgs so
-    # they're built from upstream in the `let` block above.
+    # Vim plugins are managed by Nix, not by Vim plugin manager, like vim-plug.
     plugins = (with pkgs.vimPlugins; [
       lightline-vim
       vim-gitgutter
@@ -157,7 +124,6 @@ in {
     ];
     extraConfig = builtins.readFile ./vimrc;
   };
-
   programs.tmux = {
     enable = true;
     prefix = "C-j";
@@ -169,24 +135,20 @@ in {
     plugins = [ pkgs.tmuxPlugins.sensible ];
     extraConfig = builtins.readFile ./tmux.conf;
   };
-
   programs.i3status = {
     enable = true;
-
     general = {
       colors = true;
       color_good = "#8C9440";
       color_bad = "#A54242";
       color_degraded = "#DE935F";
     };
-
     modules = {
       ipv6.enable = false;
       "wireless _first_".enable = false;
       "battery all".enable = false;
     };
   };
-
   programs.git = {
     enable = true;
     settings = {
@@ -201,16 +163,12 @@ in {
       };
     };
   };
-
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
-
   programs.fzf.enable = true;
-
-  # Runs an ssh-agent for the user session, replacing the manual `eval
-  # $(ssh-agent)` block from the macOS zshrc. Add keys with `ssh-add` (your
-  # key files must be copied into ~/.ssh on the VM first).
+  # Runs an ssh-agent for the user session. Add keys with `ssh-add` (must be
+  # copied into ~/.ssh on the VM first).
   services.ssh-agent.enable = true;
 }
