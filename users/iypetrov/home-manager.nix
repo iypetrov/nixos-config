@@ -53,7 +53,7 @@ in {
     yq
     tree
     watch
-    silver-searcher-ng
+    silver-searcher
 
     # light tooling ported from the macOS shell
     terraform
