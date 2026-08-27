@@ -1,34 +1,30 @@
 scriptencoding utf-8
 set encoding=utf-8
 
-" NOTE: Plugins are managed by Nix (programs.vim.plugins in home-manager.nix),
-" so the vim-plug bootstrap/`call plug#begin()` block from the original config
-" has been removed. Plugin *configuration* stays here.
-
 " Basic
-let mapleader=" "         " The <leader> key
-set autoread              " Reload files that have not been modified
-set backspace=2           " Makes backspace behave like you'd expect
-set colorcolumn=80        " Highlight 80 character limit
-set hidden                " Allow buffers to be backgrounded without being saved
-set number relativenumber " Show the liner numbes in realtive mode
-" set cursorline            " Highlight the current line
-set ruler                 " Show the line number and column in the status bar
-set scrolloff=999         " Keep the cursor int the center of the screen
-set noshowmatch           " Don't highlight matching braces
-set showmode              " Show the current mode on the open buffer
-set splitbelow            " Splits show up below by default
-set splitright            " Splits go to the right by default
-set title                 " Set the title for gvim
-set visualbell            " Use a visual bell to notify us
-set nowrap                " If the line is too long don't split it on the new line
+let mapleader=" "         " The <leader> key.
+set autoread              " Reload files that have not been modified.
+set backspace=2           " Makes backspace behave like you'd expect.
+set colorcolumn=80        " Highlight 80 character limit.
+set hidden                " Allow buffers to be backgrounded without being saved.
+set number relativenumber " Show the liner numbes in realtive mode.
+" set cursorline            " Highlight the current line.
+set ruler                 " Show the line number and column in the status bar.
+set scrolloff=999         " Keep the cursor int the center of the screen.
+set noshowmatch           " Don't highlight matching braces.
+set showmode              " Show the current mode on the open buffer.
+set splitbelow            " Splits show up below by default.
+set splitright            " Splits go to the right by default.
+set title                 " Set the title for gvim.
+set visualbell            " Use a visual bell to notify us.
+set nowrap                " If the line is too long don't split it on the new line.
 
-" Customize session options. Namely, I don't want to save hidden and
-" unloaded buffers or empty windows.
+" Customize session options. Namely, I don't want to save hidden and unloaded
+" buffers or empty windows.
 set sessionoptions="curdir,folds,help,options,tabpages,winsize"
 
 let g:loaded_matchparen = 1
-syntax on                 " Enable filetype detection by syntax
+syntax on                 " Enable filetype detection by syntax.
 
 " Backup settings
 set nobackup
@@ -38,26 +34,26 @@ set undofile
 let &undodir = expand("$HOME") . "/.vim/undodir"
 
 " Search settings
-set hlsearch   " Highlight results
-set ignorecase " Ignore casing of searches
-set incsearch  " Start showing results as you type
-set smartcase  " Be smart about case sensitivity when searching
+set hlsearch   " Highlight results.
+set ignorecase " Ignore casing of searches.
+set incsearch  " Start showing results as you type.
+set smartcase  " Be smart about case sensitivity when searching.
 
 " Tab settings
-set expandtab     " Expand tabs to the proper type and size
-set tabstop=4     " Tabs width in spaces
-set softtabstop=4 " Soft tab width in spaces
-set shiftwidth=4  " Amount of spaces when shifting
+set expandtab     " Expand tabs to the proper type and size.
+set tabstop=4     " Tabs width in spaces.
+set softtabstop=4 " Soft tab width in spaces.
+set shiftwidth=4  " Amount of spaces when shifting.
 
 " Tab completion settings
-set wildmode=list:longest     " Wildcard matches show a list, matching the longest first
-set wildignore+=.git,.hg,.svn " Ignore version control repos
-set wildignore+=*.6           " Ignore Go compiled files
-set wildignore+=*.pyc         " Ignore Python compiled files
-set wildignore+=*.rbc         " Ignore Rubinius compiled files
-set wildignore+=*.swp         " Ignore vim backups
+set wildmode=list:longest     " Wildcard matches show a list, matching the longest first.
+set wildignore+=.git,.hg,.svn " Ignore version control repos.
+set wildignore+=*.6           " Ignore Go compiled files.
+set wildignore+=*.pyc         " Ignore Python compiled files.
+set wildignore+=*.rbc         " Ignore Rubinius compiled files.
+set wildignore+=*.swp         " Ignore vim backups.
 
-" Make navigation up and down a lot more pleasent
+" Make navigation up and down a lot more pleasent.
 map j gj
 map k gk
 
@@ -65,44 +61,44 @@ map k gk
 nnoremap <leader>s :split<CR>
 nnoremap <leader>v :vsplit<CR>
 
-" Make navigating around splits easier
+" Make navigating around splits easier.
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" Shortcut to yanking to the system clipboard
+" Shortcut to yanking to the system clipboard.
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>Y "+Y
 vnoremap <leader>Y "+Y
 
-" Shortcut for pasting from without changing the vim buffer
+" Shortcut for pasting from without changing the vim buffer.
 nnoremap <leader>p "_dP
 vnoremap <leader>p "_dP
 
-" Shortcut for deleting from without changing the vim buffer
+" Shortcut for deleting from without changing the vim buffer.
 vnoremap <leader>d "_d
 
-" Go back to the file tree
+" Go back to the file tree.
 nnoremap <leader>pv :Ex<CR>
 
-" Replace currrent word occurrences
+" Replace currrent word occurrences.
 nnoremap <leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
-" Get rid of search highlights
+" Get rid of search highlights.
 noremap <silent><leader>/ :nohlsearch<cr>
 
-" Command to write as root if we dont' have permission
+" Command to write as root if we dont' have permission.
 cmap w!! %!sudo tee > /dev/null %
 
 " Buffer management
 nnoremap <leader>d   :bd<cr>
 
-" Copy path to a directory of the current file in a git repository
+" Copy path to a directory of the current file in a Git repository.
 nnoremap <leader>x :let @+ = substitute(expand('%:p:h'), system('git rev-parse --show-toplevel')->trim() . '/', '', '')<CR>
 
-" Clear whitespace at the end of lines automatically
+" Clear whitespace at the end of lines automatically.
 autocmd BufWritePre * :%s/\s\+$//e
 
 " Don't fold anything.
@@ -121,7 +117,7 @@ let g:lightline = {
 " vim-markdown-preview
 nmap <C-m> <Plug>MarkdownPreviewToggle
 
-" ctrlp (uses the silver searcher `ag` to list files)
+" ctrlp
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore ".git" --ignore "node_modules" --ignore "dist" --ignore "target" --ignore "vendor" --ignore "tmp" --ignore ".terraform"'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_mruf_relative = 1
@@ -217,7 +213,7 @@ function! s:on_lsp_buffer_enabled() abort
       autocmd! BufWritePre *.rs,*.go,*.ts,*.tsx,*.js,*.jsx,*.py call execute('LspDocumentFormatSync')
     augroup END
 
-    " refer to doc to add more commands
+    " Refer to docs to add more commands.
 endfunction
 
 augroup lsp_install
@@ -226,7 +222,7 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-" vim-go (LSP features delegated to vim-lsp; vim-go used for non-LSP tooling only)
+" vim-go
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_def_mapping_enabled = 0
