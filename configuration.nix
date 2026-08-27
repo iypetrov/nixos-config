@@ -102,6 +102,9 @@
       lightdm.enable = true;
       sessionCommands = ''
         ${pkgs.xset}/bin/xset r rate 200 40
+        # Make ~/.local/bin (home-manager-linked scripts) available to the X
+        # session, so i3 can run them by bare name (e.g. i3_autoresize.sh).
+        export PATH="$HOME/.local/bin:$PATH"
       '';
     };
   };

@@ -3,3 +3,4 @@ font-family = "JetBrainsMono Nerd Font"
 theme = "Black Metal (Burzum)"
 confirm-close-surface = false
 shell-integration = zsh
+window-decoration = none

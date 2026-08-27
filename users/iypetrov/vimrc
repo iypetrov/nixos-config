@@ -1,45 +1,243 @@
-" vimrc — sane defaults. home-manager (programs.vim) reads this via extraConfig.
+scriptencoding utf-8
+set encoding=utf-8
 
-set nocompatible
-syntax on
-filetype plugin indent on
+" NOTE: Plugins are managed by Nix (programs.vim.plugins in home-manager.nix),
+" so the vim-plug bootstrap/`call plug#begin()` block from the original config
+" has been removed. Plugin *configuration* stays here.
 
-" UI
-set number
-set relativenumber
-set ruler
-set showcmd
-set laststatus=2
-set scrolloff=5
-set signcolumn=yes
+" Basic
+let mapleader=" "         " The <leader> key
+set autoread              " Reload files that have not been modified
+set backspace=2           " Makes backspace behave like you'd expect
+set colorcolumn=80        " Highlight 80 character limit
+set hidden                " Allow buffers to be backgrounded without being saved
+set number relativenumber " Show the liner numbes in realtive mode
+" set cursorline            " Highlight the current line
+set ruler                 " Show the line number and column in the status bar
+set scrolloff=999         " Keep the cursor int the center of the screen
+set noshowmatch           " Don't highlight matching braces
+set showmode              " Show the current mode on the open buffer
+set splitbelow            " Splits show up below by default
+set splitright            " Splits go to the right by default
+set title                 " Set the title for gvim
+set visualbell            " Use a visual bell to notify us
+set nowrap                " If the line is too long don't split it on the new line
 
-" Search
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
+" Customize session options. Namely, I don't want to save hidden and
+" unloaded buffers or empty windows.
+set sessionoptions="curdir,folds,help,options,tabpages,winsize"
 
-" Indentation (4-space, expandtab)
-set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set autoindent
-set smartindent
+let g:loaded_matchparen = 1
+syntax on                 " Enable filetype detection by syntax
 
-" Behavior
-set hidden
-set mouse=a
-set clipboard=unnamedplus
-set backspace=indent,eol,start
-set wildmenu
-set splitright
-set splitbelow
-
-" No swap/backup clutter
-set noswapfile
+" Backup settings
 set nobackup
 set nowritebackup
+set noswapfile
+set undofile
+let &undodir = expand("$HOME") . "/.vim/undodir"
 
-" Clear search highlight with <leader> + space (leader = \ by default)
-nnoremap <leader><space> :nohlsearch<CR>
+" Search settings
+set hlsearch   " Highlight results
+set ignorecase " Ignore casing of searches
+set incsearch  " Start showing results as you type
+set smartcase  " Be smart about case sensitivity when searching
+
+" Tab settings
+set expandtab     " Expand tabs to the proper type and size
+set tabstop=4     " Tabs width in spaces
+set softtabstop=4 " Soft tab width in spaces
+set shiftwidth=4  " Amount of spaces when shifting
+
+" Tab completion settings
+set wildmode=list:longest     " Wildcard matches show a list, matching the longest first
+set wildignore+=.git,.hg,.svn " Ignore version control repos
+set wildignore+=*.6           " Ignore Go compiled files
+set wildignore+=*.pyc         " Ignore Python compiled files
+set wildignore+=*.rbc         " Ignore Rubinius compiled files
+set wildignore+=*.swp         " Ignore vim backups
+
+" Make navigation up and down a lot more pleasent
+map j gj
+map k gk
+
+" Make splits
+nnoremap <leader>s :split<CR>
+nnoremap <leader>v :vsplit<CR>
+
+" Make navigating around splits easier
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Shortcut to yanking to the system clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+vnoremap <leader>Y "+Y
+
+" Shortcut for pasting from without changing the vim buffer
+nnoremap <leader>p "_dP
+vnoremap <leader>p "_dP
+
+" Shortcut for deleting from without changing the vim buffer
+vnoremap <leader>d "_d
+
+" Go back to the file tree
+nnoremap <leader>pv :Ex<CR>
+
+" Replace currrent word occurrences
+nnoremap <leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+
+" Get rid of search highlights
+noremap <silent><leader>/ :nohlsearch<cr>
+
+" Command to write as root if we dont' have permission
+cmap w!! %!sudo tee > /dev/null %
+
+" Buffer management
+nnoremap <leader>d   :bd<cr>
+
+" Copy path to a directory of the current file in a git repository
+nnoremap <leader>x :let @+ = substitute(expand('%:p:h'), system('git rev-parse --show-toplevel')->trim() . '/', '', '')<CR>
+
+" Clear whitespace at the end of lines automatically
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Don't fold anything.
+autocmd BufWinEnter * set foldlevel=999999
+
+set termguicolors
+set background=dark
+colorscheme zazen
+
+" lightline.vim
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ }
+
+" vim-markdown-preview
+nmap <C-m> <Plug>MarkdownPreviewToggle
+
+" ctrlp (uses ripgrep; the silver searcher was removed from nixpkgs)
+let g:ctrlp_user_command = 'rg %s --files --hidden --glob "!.git" --glob "!node_modules" --glob "!dist" --glob "!target" --glob "!vendor" --glob "!tmp" --glob "!.terraform"'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_mruf_relative = 1
+
+nnoremap <leader>fr :CtrlPMRU<CR>
+
+" fzf
+let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.3, 'relative': v:true, 'yoffset': 1.0 } }
+let g:fzf_vim_relative_paths = 1
+
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git" --glob "!node_modules" --glob "!dist" --glob "!target" --glob "!vendor" --glob "!tmp" --glob "!.terraform"'
+
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fp :RG<CR>
+
+" vim-gitgutter
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '~'
+let g:gitgutter_sign_removed = '-'
+
+" undotree
+nmap <leader>h :UndotreeToggle<CR>
+
+" vim-lsp
+let g:lsp_diagnostics_virtual_text_enabled = 1
+let g:lsp_diagnostics_virtual_text_align = 'after'
+let g:lsp_settings = {
+\  'gopls': {
+\    'cmd': ['gopls'],
+\    'allowlist': ['go'],
+\    'workspace_config': {
+\      'gopls': {
+\        'staticcheck': v:true,
+\        'analyses': {'unusedparams': v:true},
+\      }
+\    }
+\  },
+\  'typescript-language-server': {
+\    'cmd': ['typescript-language-server', '--stdio'],
+\    'allowlist': ['typescript', 'typescriptreact', 'javascript', 'javascriptreact'],
+\  },
+\  'emmylua-ls': {
+\    'cmd': ['emmylua_ls'],
+\    'allowlist': ['lua'],
+\  },
+\  'clangd': {
+\    'cmd': ['clangd'],
+\    'allowlist': ['c', 'cc', 'cpp', 'h'],
+\  },
+\  'jedi-language-server': {
+\    'cmd': ['jedi-language-server'],
+\    'allowlist': ['python'],
+\  },
+\  'terraform-ls': {
+\    'cmd': ['terraform-ls', 'serve'],
+\    'allowlist': ['terraform', 'terraform-vars'],
+\  },
+\}
+
+highlight LspDiagnosticsVirtualTextError guifg=Red ctermfg=Red
+highlight LspDiagnosticsVirtualTextWarning guifg=Yellow ctermfg=Yellow
+highlight LspDiagnosticsVirtualTextInformation guifg=Blue ctermfg=Blue
+highlight LspDiagnosticsVirtualTextHint guifg=Green ctermfg=Green
+
+nmap <leader>[[ :LspPreviousError<CR>
+nmap <leader>]] :LspNextError<CR>
+
+augroup LspCloseReferenceWindow
+  autocmd!
+  autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
+augroup END
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> rn <plug>(lsp-rename)
+    nmap <buffer> ca <plug>(lsp-code-action)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-b> lsp#scroll(-4)
+
+    let g:lsp_format_sync_timeout = 1000
+    augroup lsp_format
+      autocmd! BufWritePre *.rs,*.go,*.ts,*.tsx,*.js,*.jsx,*.py call execute('LspDocumentFormatSync')
+    augroup END
+
+    " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+" vim-go (LSP features delegated to vim-lsp; vim-go used for non-LSP tooling only)
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_def_mapping_enabled = 0
+let g:go_code_completion_enabled = 0
+let g:go_diagnostics_enabled = 0
+let g:go_fmt_autosave = 0
+let g:go_fmt_command = "goimports"
+let g:go_play_browser_command = 'open %URL% &'
+
+augroup go_mappings
+  autocmd!
+  autocmd FileType go nmap <leader>err :GoIfErr<CR>
+  autocmd FileType go nmap <leader>dc :GoDocBrowser<CR>
+augroup END
