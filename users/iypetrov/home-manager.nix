@@ -149,20 +149,6 @@ in {
       "battery all".enable = false;
     };
   };
-  programs.git = {
-    enable = true;
-    settings = {
-      user.name = "Ilia Petrov";
-      user.email = "CHANGEME@example.com"; # TODO: set your real email
-      init.defaultBranch = "main";
-      push.default = "tracking";
-      color.ui = true;
-      alias = {
-        prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
-        root = "rev-parse --show-toplevel";
-      };
-    };
-  };
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
