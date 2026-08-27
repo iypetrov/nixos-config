@@ -67,7 +67,7 @@ in {
     yq
     tree
     watch
-    ripgrep   # `rg`; also backs the `ag`/`aggo` aliases
+    silver-searcher-ng
 
     # light tooling ported from the macOS shell
     terraform

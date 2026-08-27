@@ -121,8 +121,8 @@ let g:lightline = {
 " vim-markdown-preview
 nmap <C-m> <Plug>MarkdownPreviewToggle
 
-" ctrlp (uses ripgrep; the silver searcher was removed from nixpkgs)
-let g:ctrlp_user_command = 'rg %s --files --hidden --glob "!.git" --glob "!node_modules" --glob "!dist" --glob "!target" --glob "!vendor" --glob "!tmp" --glob "!.terraform"'
+" ctrlp (uses the silver searcher `ag` to list files)
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore ".git" --ignore "node_modules" --ignore "dist" --ignore "target" --ignore "vendor" --ignore "tmp" --ignore ".terraform"'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_mruf_relative = 1
 
@@ -132,7 +132,7 @@ nnoremap <leader>fr :CtrlPMRU<CR>
 let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.3, 'relative': v:true, 'yoffset': 1.0 } }
 let g:fzf_vim_relative_paths = 1
 
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git" --glob "!node_modules" --glob "!dist" --glob "!target" --glob "!vendor" --glob "!tmp" --glob "!.terraform"'
+let $FZF_DEFAULT_COMMAND = 'ag -l --nocolor --hidden -g "" --ignore ".git" --ignore "node_modules" --ignore "dist" --ignore "target" --ignore "vendor" --ignore "tmp" --ignore ".terraform"'
 
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fp :RG<CR>
