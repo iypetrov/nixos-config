@@ -15,47 +15,32 @@ export LANG=en_US.UTF-8
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt append_history      # Append to history file
-setopt hist_ignore_space   # Don't store commands starting with space
-setopt hist_reduce_blanks  # Remove superfluous blanks
-setopt auto_cd             # If command is dir, cd into it
-setopt interactivecomments # Allow comments in command line
-setopt prompt_subst        # Enable prompt themes
+setopt append_history      # Append to history file.
+setopt hist_ignore_space   # Don't store commands starting with space.
+setopt hist_reduce_blanks  # Remove superfluous blanks.
+setopt auto_cd             # If command is dir, cd into it.
+setopt interactivecomments # Allow comments in command line.
+setopt prompt_subst        # Enable prompt themes.
 
 # Completion tweaks (compinit itself is run by home-manager's enableCompletion).
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 _comp_options+=(globdots)  # Include hidden files.
 
-# --------------------------------------------------------------------------
-# Aliases
-# --------------------------------------------------------------------------
-
-# common
+# Common
 alias ll='ls -la --color'
 alias grep="grep --color"
-alias logs="tail -f /var/log/syslog"
+alias ag="ag --hidden"
+alias pbcopy="xclip -selection clipboard"
+alias pbpaste="xclip -selection clipboard -o"
 
-# bat
-export BAT_THEME="Nord"
-
-# `ag` is the silver searcher (silver-searcher-ng). `aggo` restricts it to Go
-# files and skips generated code.
-function aggo() {
-    ag --go \
-       --ignore 'zz_*.go' \
-       --ignore '*_generated.go' \
-       --ignore 'generated.pb.go' \
-       "$@"
-}
-
-# terraform
+# Terraform
 alias tf="terraform"
 alias tfv="terraform validate"
 alias tffmt="terraform fmt"
 alias tfi="terraform init"
 
-# docker
+# Docker
 alias d="docker"
 alias dcu="docker-compose up -d"
 drm() {
@@ -63,33 +48,13 @@ drm() {
   docker rm -f $(docker ps -aq)
 }
 
-# kubectl
+# Kubernetes
 export KUBE_EDITOR=vim
-
-# go
-export GOBIN=$HOME/go/bin
-export PATH=$PATH:$GOBIN
-
-# --------------------------------------------------------------------------
-# Functions
-# --------------------------------------------------------------------------
-
-kill_pids_on_port() {
-    port=$1
-    while read pid; do
-        kill -9 ${pid}
-    done < <(lsof -i :${port} | tail -n +2 | tr -s "[:space:]" " " | cut -d ' ' -f 2)
-}
-
-# --------------------------------------------------------------------------
-# Completions (guarded so a missing tool doesn't error out the shell)
-# --------------------------------------------------------------------------
-
 command -v kubectl >/dev/null && source <(command kubectl completion zsh)
 
-# --------------------------------------------------------------------------
-# Prompt
-# --------------------------------------------------------------------------
+# Go
+export GOBIN=$HOME/go/bin
+export PATH=$PATH:$GOBIN
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

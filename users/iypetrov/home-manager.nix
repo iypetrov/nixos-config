@@ -1,20 +1,6 @@
 { pkgs, lib, ... }:
 
 let
-  shellAliases = {
-    ga = "git add";
-    gc = "git commit";
-    gco = "git checkout";
-    gdiff = "git diff";
-    gl = "git prettylog";
-    gp = "git push";
-    gs = "git status";
-
-    # Two decades of muscle memory: keep pbcopy/pbpaste working on Linux.
-    pbcopy = "xclip -selection clipboard";
-    pbpaste = "xclip -selection clipboard -o";
-  };
-
   # Vim plugins not packaged in nixpkgs, built straight from upstream.
   zazen = pkgs.vimUtils.buildVimPlugin {
     name = "zazen";
