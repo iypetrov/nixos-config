@@ -86,6 +86,7 @@ in {
 
     # GUI terminal (config lives in ./ghostty.linux, linked below)
     ghostty
+    rofi
 
     # i3 support tools referenced by ./i3
     dex                    # XDG autostart (dex --autostart)
