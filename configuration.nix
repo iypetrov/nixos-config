@@ -134,9 +134,13 @@
     killall
     xclip
 
-    # GUI / i3
-    ghostty
+    # GUI / i3 (ghostty is installed per-user via home-manager)
     rofi
+  ];
+
+  # Fonts (JetBrainsMono Nerd Font is used by ghostty and i3).
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
   ];
 
   # Leave at your first install's release

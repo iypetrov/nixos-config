@@ -1,0 +1,5 @@
+font-size = 13
+font-family = "JetBrainsMono Nerd Font"
+theme = "Black Metal (Burzum)"
+confirm-close-surface = false
+shell-integration = zsh

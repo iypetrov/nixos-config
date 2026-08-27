@@ -27,12 +27,22 @@ in {
   # User-facing CLI tools. Project-specific tooling should come from
   # per-project flakes + direnv rather than living here.
   home.packages = with pkgs; [
+    # common
     bat
     fzf
     jq
     yq
     tree
     watch
+    ripgrep   # `rg`; also backs the `ag`/`aggo` aliases
+
+    # light tooling ported from the macOS shell
+    terraform
+    kubectl
+    docker-compose
+
+    # GUI terminal (config lives in ./ghostty.linux, linked below)
+    ghostty
   ];
 
   #---------------------------------------------------------------------
@@ -50,6 +60,12 @@ in {
   # per-user config is a plain dotfile we link into place here.
   xdg.configFile."i3/config".source = ./i3;
 
+  # ghostty terminal config (raw file, mitchellh-style).
+  xdg.configFile."ghostty/config".source = ./ghostty.linux;
+
+  # Powerlevel10k prompt config, linked to ~/.p10k.zsh (see programs.zsh below).
+  home.file.".p10k.zsh".source = ./p10k.zsh;
+
   #---------------------------------------------------------------------
   # Programs
   #---------------------------------------------------------------------
@@ -60,8 +76,20 @@ in {
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     shellAliases = shellAliases;
+    # powerlevel10k prompt theme, sourced before our zshrc so instant-prompt works.
+    plugins = [{
+      name = "powerlevel10k";
+      src = pkgs.zsh-powerlevel10k;
+      file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    }];
     # initContent (not initExtra) — renamed in home-manager 25.05+.
     initContent = builtins.readFile ./zshrc;
+  };
+
+  # Shell history search. --disable-up-arrow keeps the up key as plain history.
+  programs.atuin = {
+    enable = true;
+    flags = [ "--disable-up-arrow" ];
   };
 
   programs.vim = {
@@ -116,4 +144,9 @@ in {
   };
 
   programs.fzf.enable = true;
+
+  # Runs an ssh-agent for the user session, replacing the manual `eval
+  # $(ssh-agent)` block from the macOS zshrc. Add keys with `ssh-add` (your
+  # key files must be copied into ~/.ssh on the VM first).
+  services.ssh-agent.enable = true;
 }

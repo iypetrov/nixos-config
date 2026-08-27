@@ -1,14 +1,102 @@
-# Minimal zsh config. home-manager (programs.zsh) handles aliases,
-# completion, autosuggestions, and syntax highlighting for us; this file is
-# for the rest of the interactive-shell behavior.
+# zsh interactive config. home-manager (programs.zsh) handles completion,
+# autosuggestions, syntax highlighting, aliases, the powerlevel10k plugin, and
+# atuin for us. This file holds the rest of the interactive-shell behavior.
+#
+# Ported from the macOS ~/.zshrc. Homebrew-specific PATH shims and manual plugin
+# sourcing were dropped — on NixOS coreutils/sed/tar/grep are already GNU, and
+# Nix wires the plugins.
 
-setopt AUTO_CD                 # `foo/` cd's into foo
-setopt HIST_IGNORE_DUPS        # don't record consecutive dupes
-setopt HIST_IGNORE_SPACE       # leading space keeps a command out of history
-setopt SHARE_HISTORY           # share history across sessions
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-HISTSIZE=100000
-SAVEHIST=100000
+# vi keybindings.
+bindkey -v
+export KEYTIMEOUT=1
 
-# Emacs-style line editing.
-bindkey -e
+# History.
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt append_history      # Append to history file
+setopt hist_ignore_space   # Don't store commands starting with space
+setopt hist_reduce_blanks  # Remove superfluous blanks
+
+setopt auto_cd             # If command is dir, cd into it
+setopt interactivecomments # Allow comments in command line
+setopt prompt_subst        # Enable prompt themes
+
+# Completion tweaks (compinit itself is run by home-manager's enableCompletion).
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+_comp_options+=(globdots)  # Include hidden files.
+
+# --------------------------------------------------------------------------
+# Aliases
+# --------------------------------------------------------------------------
+
+# common
+alias ll='ls -la --color'
+alias grep="grep --color"
+alias logs="tail -f /var/log/syslog"
+
+# bat
+export BAT_THEME="Nord"
+
+# ripgrep replaces the silver searcher (ag), which was removed from nixpkgs.
+alias ag="rg"
+function aggo() {
+    rg --type go \
+       --glob '!zz_*.go' \
+       --glob '!*_generated.go' \
+       --glob '!generated.pb.go' \
+       "$@"
+}
+
+# terraform
+alias tf="terraform"
+alias tfv="terraform validate"
+alias tffmt="terraform fmt"
+alias tfi="terraform init"
+
+# docker
+alias d="docker"
+alias dcu="docker-compose up -d"
+drm() {
+  docker stop $(docker ps -aq)
+  docker rm -f $(docker ps -aq)
+}
+
+# kubectl
+export KUBE_EDITOR=vim
+
+# go
+export GOBIN=$HOME/go/bin
+export PATH=$PATH:$GOBIN
+
+# --------------------------------------------------------------------------
+# Functions
+# --------------------------------------------------------------------------
+
+kill_pids_on_port() {
+    port=$1
+    while read pid; do
+        kill -9 ${pid}
+    done < <(lsof -i :${port} | tail -n +2 | tr -s "[:space:]" " " | cut -d ' ' -f 2)
+}
+
+# --------------------------------------------------------------------------
+# Completions (guarded so a missing tool doesn't error out the shell)
+# --------------------------------------------------------------------------
+
+command -v kubectl >/dev/null && source <(command kubectl completion zsh)
+
+# --------------------------------------------------------------------------
+# Prompt
+# --------------------------------------------------------------------------
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
