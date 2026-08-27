@@ -11,7 +11,7 @@ export EDITOR='vim'
 export KEYTIMEOUT=1
 export LANG=en_US.UTF-8
 
-# History.
+# History
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -28,6 +28,7 @@ zmodload zsh/complist
 _comp_options+=(globdots)  # Include hidden files.
 
 # Common
+PROMPT='%n@%m %1~ %# '
 alias ll='ls -la --color'
 alias grep="grep --color"
 alias ag="ag --hidden"
@@ -50,7 +51,8 @@ drm() {
 
 # Kubernetes
 export KUBE_EDITOR=vim
-command -v kubectl >/dev/null && source <(command kubectl completion zsh)
+# export KUBECONFIG="$(realpath "$(yq -r '\''.current as $c | .targets[] | select(.name == $c) | .kubeconfigPath'\'' ~/.config/knav/config.yaml | sed "s|^~|$HOME|")")"'
+alias k="kubectl"
 
 # Go
 export GOBIN=$HOME/go/bin

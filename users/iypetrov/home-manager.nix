@@ -117,7 +117,6 @@ in {
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
-    shellAliases = shellAliases;
     # powerlevel10k prompt theme, sourced before our zshrc so instant-prompt works.
     plugins = [{
       name = "powerlevel10k";
