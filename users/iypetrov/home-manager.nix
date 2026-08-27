@@ -44,7 +44,7 @@ in {
     tree
     watch
     silver-searcher
-    whiptail
+    newt
 
     # Specific for me.
     terraform
