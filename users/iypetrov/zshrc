@@ -11,6 +11,12 @@ export EDITOR='vim'
 export KEYTIMEOUT=1
 export LANG=en_US.UTF-8
 
+# Base directory for project checkouts.
+export XDG_PROJECTS_DIR="$HOME/projects"
+
+# Private secrets synced by nixos-config-private's `make vm/secrets`.
+[[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/secrets.env" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/secrets.env"
+
 # History
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
