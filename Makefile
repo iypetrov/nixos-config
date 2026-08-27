@@ -22,7 +22,16 @@ SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o Strict
 
 .PHONY: switch
 switch:
-	@echo 'sudo nixos-rebuild switch --flake ".#${NIXNAME}"'
+	@sudo nixos-rebuild switch --flake ".#${NIXNAME}"
+
+.PHONY: test
+test:
+	@sudo nixos-rebuild test --flake ".#$(NIXNAME)"
+
+.PHONY: check
+check:
+	@nix flake check --all-systems --no-build
+	@nix eval --raw '.#nixosConfigurations.vm-aarch64.config.system.build.toplevel.drvPath' >/dev/null
 
 # Bootstrap a brand new VM. The VM should have NixOS ISO on the CD drive.
 # Set the password of the root user to "root". After installing NixOS, you must
