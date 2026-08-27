@@ -1,22 +1,12 @@
-# i3 config — https://i3wm.org/docs/userguide.html
-# Ported from the host machine. Host-specific bits were adjusted for the VM:
-#  - terminal: alacritty -> ghostty
-#  - removed /projects/common/.dotfiles autostart.sh (doesn't exist here)
-#  - removed laptop-only keys (brightness, media, layout toggle) and volume
-#    keys (VM has no sound card)
+# https://i3wm.org/docs/userguide.html
 
 set $mod Mod1
 font pango:JetBrainsMono Nerd Font 10
 
-# Custom startup script (linked to ~/.local/bin/i3_autoresize.sh by home-manager).
-# Kept first so it runs before the other autostarts. Matches the VM display
-# resolution to the VMware window. ~/.local/bin is put on the session PATH via
-# displayManager.sessionCommands in configuration.nix.
 exec --no-startup-id i3_autoresize.sh
-
+exec --no-startup-id nm-applet
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nm-applet
 
 set $refresh_i3status killall -SIGUSR1 i3status
 floating_modifier $mod
@@ -51,7 +41,6 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-# Re-run the autoresize script on demand (also runs once at startup, above).
 bindsym $mod+Shift+x exec --no-startup-id i3_autoresize.sh
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
