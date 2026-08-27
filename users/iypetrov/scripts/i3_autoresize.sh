@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 [[ ! $( command -v xrandr ) ]] && echo "Error: You need to have xrandr installed" >&2 && exit 1
 
 _SCRIPT_NAME="${0##*/}"
