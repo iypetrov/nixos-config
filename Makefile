@@ -1,23 +1,23 @@
 .DEFAULT_GOAL := switch
 
-# Set SHELL to bash and configure options
+# Set SHELL to bash and configure options.
 SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -ec
 
-# Connectivity info for Linux VM
+# Connectivity info for Linux VM.
 NIXADDR ?= unset
 NIXPORT ?= 22
 NIXUSER ?= iypetrov
 NIXNAME ?= vm-aarch64
 
-# NixOS configuration built by the cache target
+# NixOS configuration built by the cache target.
 NIXCACHE_NAME ?= vm-aarch64
 
-# Get the path to this Makefile and directory
+# Get the path to this Makefile and directory.
 MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
-# SSH options that are used. These aren't meant to be overridden but are
-# reused a lot so we just store them up here.
+# SSH options that are used. These aren't meant to be overridden but are reused
+# a lot so we just store them up here.
 SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
 .PHONY: switch
@@ -70,15 +70,7 @@ vm/bootstrap:
 		sudo reboot; \
 	"
 
-# Copy secrets into the VM
-.PHONY: vm/secrets
-vm/secrets:
-	# SSH keys
-	@rsync -av -e 'ssh $(SSH_OPTIONS)' \
-		--exclude='environment' \
-		$(HOME)/.ssh/ $(NIXUSER)@$(NIXADDR):~/.ssh
-
-# Copy the Nix configurations into the VM
+# Copy the Nix configurations into the VM.
 .PHONY: vm/copy
 vm/copy:
 	@rsync -av -e 'ssh $(SSH_OPTIONS) -p$(NIXPORT)' \
@@ -88,7 +80,7 @@ vm/copy:
 		--rsync-path="sudo rsync" \
 		$(MAKEFILE_DIR)/ $(NIXUSER)@$(NIXADDR):/nix-config
 
-# Run the nixos-rebuild switch command. Run always with vm/copy
+# Run the nixos-rebuild switch command. Run always with `vm/copy`.
 .PHONY: vm/switch
 vm/switch:
 	@ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
