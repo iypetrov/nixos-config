@@ -13,6 +13,10 @@ $ echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
 # MacOS Host
 $ make vm/bootstrap0 NIXADDR=<NIXOS-PRIVATE-IPv4>
+$ make vm/bootstrap NIXADDR=<NIXOS-PRIVATE-IPv4>
+
+# NixOS VM (after you clone the repo on the VM)
+$ make switch
 ```
 
 ## VMware Fusion VM
