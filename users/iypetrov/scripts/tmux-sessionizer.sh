@@ -21,7 +21,7 @@ function _main() {
         exit 0
     fi
 
-    local _curr_session="$(echo "${target}" | tr '.' '_')"
+    local _curr_session="$(echo "${_target}" | tr '.' '_')"
     local _tmux_running="$(pgrep tmux)"
     if [[ -z "$TMUX" ]] && [[ -z "${_tmux_running}" ]]; then
         tmux new-session \
@@ -30,12 +30,12 @@ function _main() {
             "vim ${XDG_PROJECTS_DIR}/${_target}; $SHELL"
         tmux new-window \
             -t "${_curr_session}:2" \
-            -c "$${XDG_PROJECTS_DIR}/${_target}"
+            -c "${XDG_PROJECTS_DIR}/${_target}"
         tmux select-window -t "${_curr_session}:1"
     fi
 
     if ! tmux has-session -t="${_curr_session}" 2> /dev/null; then
-        local repo_name="$(basename "${_target}")"
+        local _repo_name="$(basename "${_target}")"
         gh repo sync "iypetrov/${_repo_name}" 2>/dev/null || true
 
         tmux new-session \

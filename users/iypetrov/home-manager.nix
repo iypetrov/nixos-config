@@ -22,7 +22,6 @@ let
   };
 
   # Every file in ./scripts is linked into ~/.local/bin as an executable.
-  home.sessionPath = [ "$HOME/.local/bin" ];
   scriptFiles = builtins.attrNames (builtins.readDir ./scripts);
   binScripts = builtins.listToAttrs (map (name: {
     name = ".local/bin/${name}";
@@ -34,6 +33,8 @@ let
 in {
   # Home Manager state version. Leave at your first-install release.
   home.stateVersion = "26.05";
+  # Make ~/.local/bin (where ./scripts are linked) available on PATH.
+  home.sessionPath = [ "$HOME/.local/bin" ];
   xdg.enable = true;
   home.packages = with pkgs; [
     # Common utils.
