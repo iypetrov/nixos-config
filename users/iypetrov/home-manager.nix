@@ -52,6 +52,7 @@ in {
     docker-compose
     delta
     gh
+    claude-code
 
     # Go
     go
