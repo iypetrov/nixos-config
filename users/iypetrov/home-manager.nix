@@ -214,10 +214,10 @@ in {
         editPreset = "vim";
       };
       git = {
-        paging = {
+        pagers = [{
           colorArg = "always";
           pager = ''delta --dark --paging=never --syntax-theme="Sublime Snazzy"'';
-        };
+        }];
         commit.signOff = true;
         merging.args = "mergetool";
       };
