@@ -48,17 +48,59 @@ in {
     newt
 
     # Specific for me.
-    terraform
     docker-compose
     lazygit
     gh
 
+    # Go toolchain.
+    go
+    gotools          # provides goimports
+    golangci-lint
+    ginkgo
+    air
+    sqlc
+    templ
+
+    # Protobuf / gRPC.
+    protobuf
+    protoc-gen-go
+    protoc-gen-go-grpc
+    grpcurl
+
+    # C toolchain (clangd LSP is provided by clang-tools in the LSP block).
+    gcc
+    gnumake
+    cmake
+    ninja
+    gdb
+    pkg-config
+    bear
+
+    # Python.
+    python313
+    python313Packages.pip
+    pyenv
+
+    # Node / JS.
+    nodejs_24
+    yarn
+
+    # Lua.
+    lua5_2
+
+    # Build / misc.
+    skaffold
+    opentelemetry-collector-builder
+
+    # Terraform.
+    terraform
+
     # Kubernetes toolchain.
     kubectl
-    kubectx          # kubectx / kubens context+namespace switcher
+    kubectx
     kustomize
-    kubernetes-helm  # `helm`
-    fluxcd           # `flux`
+    kubernetes-helm
+    fluxcd
     k9s
     kubebuilder
     kind
