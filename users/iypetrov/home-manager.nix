@@ -49,6 +49,7 @@ in {
     newt
 
     # Specific for me.
+    podman
     docker-compose
     delta
     gh

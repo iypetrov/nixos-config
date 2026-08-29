@@ -48,11 +48,12 @@ alias tffmt="terraform fmt"
 alias tfi="terraform init"
 
 # Docker
-alias d="docker"
+alias d="podman"
+alias docker="podman"
 alias dcu="docker-compose up -d"
 drm() {
-  docker stop $(docker ps -aq)
-  docker rm -f $(docker ps -aq)
+  podman stop $( podman ps -aq )
+  podman rm -f $( podman ps -aq )
 }
 
 # Kubernetes
