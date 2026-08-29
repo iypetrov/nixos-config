@@ -125,7 +125,7 @@ let g:ctrlp_mruf_relative = 1
 nnoremap <leader>fr :CtrlPMRU<CR>
 
 " fzf
-let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.3, 'relative': v:true, 'yoffset': 1.0 } }
+let g:fzf_layout = { 'down': '40%' }
 let g:fzf_vim_relative_paths = 1
 
 let $FZF_DEFAULT_COMMAND = 'ag -l --nocolor --hidden -g "" --ignore ".git" --ignore "node_modules" --ignore "dist" --ignore "target" --ignore "vendor" --ignore "tmp" --ignore ".terraform"'
