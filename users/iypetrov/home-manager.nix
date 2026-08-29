@@ -44,30 +44,31 @@ in {
     yq
     tree
     watch
+    ripgrep
     silver-searcher
     newt
 
     # Specific for me.
     docker-compose
-    lazygit
+    delta
     gh
 
-    # Go toolchain.
+    # Go
     go
-    gotools          # provides goimports
+    gotools
     golangci-lint
     ginkgo
     air
     sqlc
     templ
 
-    # Protobuf / gRPC.
+    # gRPC
     protobuf
     protoc-gen-go
     protoc-gen-go-grpc
     grpcurl
 
-    # C toolchain (clangd LSP is provided by clang-tools in the LSP block).
+    # C
     gcc
     gnumake
     cmake
@@ -76,26 +77,26 @@ in {
     pkg-config
     bear
 
-    # Python.
+    # Python
     python313
     python313Packages.pip
     pyenv
 
-    # Node / JS.
+    # NodeJS
     nodejs_24
     yarn
 
-    # Lua.
+    # Lua
     lua5_2
 
-    # Build / misc.
+    # Build / misc
     skaffold
     opentelemetry-collector-builder
 
-    # Terraform.
+    # Terraform
     terraform
 
-    # Kubernetes toolchain.
+    # Kubernetes
     kubectl
     kubectx
     kustomize
@@ -112,11 +113,11 @@ in {
     python3Packages.jedi-language-server
     terraform-ls
 
-    # GUI terminal.
+    # GUI
     ghostty
     rofi
 
-    # i3 tools.
+    # i3
     dex                    # XDG autostart (dex --autostart)
     xss-lock               # lock on suspend
     i3lock                 # screen locker
@@ -204,6 +205,23 @@ in {
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      gui.nerdFontsVersion = "3";
+      os = {
+        editPreset = "vim";
+      };
+      git = {
+        paging = {
+          colorArg = "always";
+          pager = ''delta --dark --paging=never --syntax-theme="Sublime Snazzy"'';
+        };
+        commit.signOff = true;
+        merging.args = "mergetool";
+      };
+    };
   };
   programs.fzf.enable = true;
   # Runs an ssh-agent for the user session. Add keys with `ssh-add` (must be
