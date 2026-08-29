@@ -49,11 +49,19 @@ in {
 
     # Specific for me.
     terraform
-    kubectl
     docker-compose
     lazygit
-    k9s
     gh
+
+    # Kubernetes toolchain.
+    kubectl
+    kubectx          # kubectx / kubens context+namespace switcher
+    kustomize
+    kubernetes-helm  # `helm`
+    fluxcd           # `flux`
+    k9s
+    kubebuilder
+    kind
 
     # LSP servers
     gopls
