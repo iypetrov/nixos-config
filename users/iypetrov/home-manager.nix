@@ -119,8 +119,6 @@ in {
 
     # i3
     dex                    # XDG autostart (dex --autostart)
-    xss-lock               # lock on suspend
-    i3lock                 # screen locker
     networkmanagerapplet   # nm-applet tray
   ];
 

@@ -6,7 +6,6 @@ font pango:JetBrainsMono Nerd Font 10
 exec --no-startup-id i3_autoresize.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 set $refresh_i3status killall -SIGUSR1 i3status
 floating_modifier $mod
