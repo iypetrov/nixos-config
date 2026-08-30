@@ -57,8 +57,19 @@ drm() {
 }
 
 # Kubernetes
-export KUBE_EDITOR=vim
+# Example `$XDG_CONFIG_HOME/knav/config.yaml`:
+#
+# ---
+# current: local
+# targets:
+# - name: local
+#   kubeconfigPath: ~/.kube/local
+# - name: dev-env
+#   kubeconfigPath: ~/projects/apps/kubeconfigs/dev-kubeconf.yaml
+#   initScript: |
+#     gcloud auth login
 export KUBECONFIG="$( yq -r '.current as $c | .targets[] | select(.name == $c) | .kubeconfigPath' $XDG_CONFIG_HOME/knav/config.yaml )"
+export KUBE_EDITOR=vim
 alias k="kubectl"
 
 # Go
