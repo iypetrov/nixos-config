@@ -58,7 +58,7 @@ drm() {
 
 # Kubernetes
 export KUBE_EDITOR=vim
-# export KUBECONFIG="$(realpath "$(yq -r '\''.current as $c | .targets[] | select(.name == $c) | .kubeconfigPath'\'' ~/.config/knav/config.yaml | sed "s|^~|$HOME|")")"'
+export KUBECONFIG="yq -r '.current as $c | .targets[] | select(.name == $c) | .kubeconfigPath' $XDG_CONFIG_HOME/knav/config.yaml"
 alias k="kubectl"
 
 # Go
