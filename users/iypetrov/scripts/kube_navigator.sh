@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # Presents a menu to switch between Kubernetes namespaces, contexts, or kubeconfigs.
 
-set -e
-
 [[ ! $(command -v fzf) ]] && echo "Error: You need to have fzf installed" >&2 && return 1
 [[ ! $(command -v kubectx) ]] && echo "Error: You need to have kubectx installed" >&2 && return 1
 [[ ! $(command -v whiptail) ]] && echo "Error: You need to have whiptail installed" >&2 && return 1
@@ -20,7 +18,7 @@ function _main() {
         "knav" "kubeconfigs" \
         3>&1 1>&2 2>&3)"
     if [[ -z "${_target}" ]]; then
-      exit 1
+      return 1
     fi
 
     case "${_target}" in
@@ -32,11 +30,6 @@ function _main() {
         ;;
       "knav")
         knav.sh "$@"
-        local _post_file="${XDG_STATE_HOME}/knav/post"
-        if [[ -s "${_post_file}" ]]; then
-          source "${_post_file}"
-          : > "${_post_file}"
-        fi
         ;;
       *)
         echo "Something went wrong" >&2
