@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Sets the i3 display resolution to match the currently active xrandr output mode.
 
 set -e
 

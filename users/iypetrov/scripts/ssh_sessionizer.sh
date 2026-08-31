@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Fuzzy-selects a cluster node via knav and opens a shell into it using ops-toolbelt.
 
 set -e
 

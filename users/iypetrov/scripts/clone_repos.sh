@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Clones personal repos into XDG_PROJECTS_DIR, forking upstream repos when needed.
 
 set -e
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Fuzzy-selects a project directory and opens (or switches to) a tmux session for it.
 
 set -e
 

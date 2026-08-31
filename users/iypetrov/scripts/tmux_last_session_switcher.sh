@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Fuzzy-selects from recently used (non-attached, non-numeric) tmux sessions and switches to it.
 
 set -e
 

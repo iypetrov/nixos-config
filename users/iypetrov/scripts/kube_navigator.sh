@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Presents a menu to switch between Kubernetes namespaces, contexts, or kubeconfigs.
 
 set -e
 
