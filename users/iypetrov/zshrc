@@ -58,8 +58,25 @@ drm() {
 
 # Kubernetes
 export KUBE_EDITOR=vim
-export KUBECONFIG="$XDG_STATE_HOME/knav/current"
 alias k="kubectl"
+
+autoload -Uz add-zsh-hook
+
+function _knav_sync_kubeconfig() {
+  local state_file="${XDG_STATE_HOME}/knav/current"
+  [[ ! -f "${state_file}" ]] && return
+
+  local new_config
+  new_config="$(sed "s|^~|${HOME}|" "${state_file}")"
+  [[ ! -f "${new_config}" ]] && return
+
+  if [[ "${KUBECONFIG}" != "${new_config}" ]]; then
+    export KUBECONFIG="${new_config}"
+    p10k reload 2>/dev/null || true
+  fi
+}
+
+add-zsh-hook precmd _knav_sync_kubeconfig
 
 # Go
 export GOBIN=$HOME/go/bin
