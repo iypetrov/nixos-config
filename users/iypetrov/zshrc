@@ -79,11 +79,11 @@ function _knav_sync_kubeconfig() {
 add-zsh-hook precmd _knav_sync_kubeconfig
 
 function knav() {
-  local _post_file
-  _post_file=$(knav.sh "$@")
-  if [[ -f "${_post_file}" ]]; then
+  knav.sh "$@"
+  local _post_file="${XDG_STATE_HOME}/knav/post"
+  if [[ -s "${_post_file}" ]]; then
     source "${_post_file}"
-    rm -f "${_post_file}"
+    : > "${_post_file}"
   fi
 }
 
