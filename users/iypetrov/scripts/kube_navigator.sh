@@ -31,7 +31,12 @@ function _main() {
         kubectx
         ;;
       "knav")
-        knav
+        knav.sh "$@"
+        local _post_file="${XDG_STATE_HOME}/knav/post"
+        if [[ -s "${_post_file}" ]]; then
+          source "${_post_file}"
+          : > "${_post_file}"
+        fi
         ;;
       *)
         echo "Something went wrong" >&2
