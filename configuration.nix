@@ -58,26 +58,22 @@
   networking.firewall.enable = false;
   services.resolved.enable = true;
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
-  networking.hosts = {
-    "127.0.0.1" = [
-      # Begin of Gardener local setup section
-      "registry.local.gardener.cloud"
-      # oidc-apps-controller provider local setup
-      "dexidp"
-      "plutono-garden.ingress.local.seed.local.gardener.cloud"
-      "prometheus-seed-garden-0.ingress.local.seed.local.gardener.cloud"
-      "prometheus-aggregate-garden-0.ingress.local.seed.local.gardener.cloud"
-      "prometheus-cache-garden-0.ingress.local.seed.local.gardener.cloud"
-      "vlsingle-victoria-logs-garden.ingress.local.seed.local.gardener.cloud"
-      "prometheus-shoot-shoot--local--local-0.ingress.local.seed.local.gardener.cloud"
-      "plutono-shoot--local--local.ingress.local.seed.local.gardener.cloud"
-      "vlsingle-victoria-logs-shoot--local--local.ingress.local.seed.local.gardener.cloud"
-    ];
-    "::1" = [
-      # Begin of Gardener local setup section
-      "registry.local.gardener.cloud"
-    ];
-  };
+  networking.extraHosts = ''
+    # Begin of Gardener local setup section
+    127.0.0.1 registry.local.gardener.cloud
+    ::1 registry.local.gardener.cloud
+
+    # oidc-apps-controller provider local setup
+    127.0.0.1 dexidp
+    127.0.0.1 plutono-garden.ingress.local.seed.local.gardener.cloud
+    127.0.0.1 prometheus-seed-garden-0.ingress.local.seed.local.gardener.cloud
+    127.0.0.1 prometheus-aggregate-garden-0.ingress.local.seed.local.gardener.cloud
+    127.0.0.1 prometheus-cache-garden-0.ingress.local.seed.local.gardener.cloud
+    127.0.0.1 vlsingle-victoria-logs-garden.ingress.local.seed.local.gardener.cloud
+    127.0.0.1 prometheus-shoot-shoot--local--local-0.ingress.local.seed.local.gardener.cloud
+    127.0.0.1 plutono-shoot--local--local.ingress.local.seed.local.gardener.cloud
+    127.0.0.1 vlsingle-victoria-logs-shoot--local--local.ingress.local.seed.local.gardener.cloud
+  '';
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = true;
