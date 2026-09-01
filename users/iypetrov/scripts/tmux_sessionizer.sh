@@ -3,7 +3,9 @@
 
 set -e
 
+[[ ! $(command -v gh) ]] && echo "Error: You need to have gh installed" >&2 && return 1
 [[ ! $(command -v fzf) ]] && echo "Error: You need to have fzf installed" >&2 && return 1
+[[ ! $(command -v tmux) ]] && echo "Error: You need to have tmux installed" >&2 && return 1
 
 _SCRIPT_NAME="${0##*/}"
 _SCRIPT_DIR=$( dirname "$( readlink -f -- "${0}" )" )
@@ -24,6 +26,7 @@ function _main() {
 
     local _curr_session="$(echo "${_target}" | tr '.' '_')"
     local _tmux_running="$(pgrep tmux)"
+    local _tmux_running="$(ps -e | grep '[t]mux')"
     if [[ -z "$TMUX" ]] && [[ -z "${_tmux_running}" ]]; then
         tmux new-session \
             -s "${_curr_session}" \
