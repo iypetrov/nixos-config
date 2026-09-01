@@ -84,7 +84,11 @@ function _clone_or_fork_repo() {
         echo "🔧 Fork exists for ${_upstream}"
     else
         echo "⚠️ No fork found for ${_upstream}, creating fork..."
-        GH_HOST="${_host}" gh repo fork "${_upstream}" --clone=false
+        local _fork_err
+        if ! _fork_err=$( GH_HOST="${_host}" gh repo fork "${_upstream}" --clone=false 2>&1 ); then
+            echo "⏭️ Skipping ${_upstream}: ${_fork_err}"
+            return 0
+        fi
         echo "✅ Fork created for ${_upstream}"
     fi
 
