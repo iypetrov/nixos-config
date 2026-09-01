@@ -80,6 +80,9 @@
   services.openssh.settings.PermitRootLogin = "yes";
 
   virtualisation.docker.enable = true;
+  virtualisation.docker.daemon.settings = {
+    insecure-registries = [ "registry.local.gardener.cloud:5001" ];
+  };
 
   #-----------------------------------------------------------------------------
   # VMware Fusion                                                              #
