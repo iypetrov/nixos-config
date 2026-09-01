@@ -133,6 +133,7 @@
     gnumake
     killall
     xclip
+    iproute2
   ];
   # Leave at your first install's release.
   system.stateVersion = "26.05";

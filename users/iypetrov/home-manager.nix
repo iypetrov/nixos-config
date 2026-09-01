@@ -42,6 +42,7 @@ in {
     fzf
     jq
     yq
+    parallel
     tree
     watch
     ripgrep
