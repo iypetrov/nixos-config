@@ -95,6 +95,7 @@ in {
     # Build / misc
     skaffold
     opentelemetry-collector-builder
+    apacheHttpd
 
     # Terraform
     terraform
