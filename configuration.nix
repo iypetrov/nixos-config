@@ -57,10 +57,12 @@
   # For the development VM, a firewall is not needed.
   networking.firewall.enable = false;
   services.resolved.enable = true;
-  services.resolved.extraConfig = ''
-    DNS=172.18.255.53 fd00:ff::53
-    Domains=~local.gardener.cloud
-  '';
+  services.resolved.settings = {
+    Resolve = {
+      DNS = "172.18.255.53 fd00:ff::53";
+      Domains = "~local.gardener.cloud";
+    };
+  };
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
   networking.extraHosts = ''
     # Begin of Gardener local setup section
