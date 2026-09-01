@@ -148,6 +148,9 @@ in {
       src = pkgs.zsh-powerlevel10k;
       file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
     }];
+    envExtra = ''
+      [[ -f ~/.zshenv.secrets ]] && source ~/.zshenv.secrets
+    '';
     initContent = builtins.readFile ./zshrc;
   };
   # Shell history search.
