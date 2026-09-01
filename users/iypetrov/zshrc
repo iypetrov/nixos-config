@@ -78,15 +78,6 @@ function _knav_sync_kubeconfig() {
 
 add-zsh-hook precmd _knav_sync_kubeconfig
 
-function kube_navigator() {
-  source kube_navigator.sh "$@"
-  local _post_file="${XDG_STATE_HOME}/knav/post"
-  if [[ -s "${_post_file}" ]]; then
-    source "${_post_file}"
-    : > "${_post_file}"
-  fi
-}
-
 # Go
 export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOBIN
