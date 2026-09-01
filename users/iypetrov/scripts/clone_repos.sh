@@ -103,6 +103,27 @@ function _main() {
     _clone_repo git@github.com:iypetrov/go-playground.git personal/go-playground
     _clone_repo git@github.com:iypetrov/aws-playground.git personal/aws-playground
     _clone_repo git@github.com:iypetrov/k8s-playground.git personal/k8s-playground
+
+    # ip812
+    _clone_repo git@github.com:ip812/infra.git ip812/infra
+    _clone_repo git@github.com:ip812/blog.git ip812/blog
+
+    # oss
+    _clone_repo git@github.com:iypetrov/opentelemetry-collector-1 oss/opentelemetry-collector # Had to manually fork the otel-col repo, because there was a name conflict with the Gardener's otel-col fork.
+    _clone_or_fork_repo git@github.com:open-telemetry/opentelemetry-operator.git oss/opentelemetry-operator
+    _clone_or_fork_repo git@github.com:open-telemetry/opentelemetry-collector-contrib.git oss/opentelemetry-collector-contrib
+
+    _clone_or_fork_repo git@github.com:fluent/fluent-bit.git oss/fluent-bit
+    _clone_or_fork_repo git@github.com:fluent/fluent-bit-go.git oss/fluent-bit-go
+    _clone_or_fork_repo git@github.com:fluent/fluent-operator.git oss/fluent-operator
+
+    gh repo list "gardener" --limit 1000 --json nameWithOwner,sshUrl | jq -r '.[] | .sshUrl' | while read -r repo_url; do
+        local _gardener_repo_name=$( echo "${repo_url##*/}" | sed 's/\.git$//' )
+        if [[ "${gardener_repo_name}" == "observability" ]]; then
+            continue
+        fi
+        _clone_or_fork_repo "${repo_url}" "oss/gardener-${gardener_repo_name}"
+    done
 }
 
 _main "$@"
