@@ -63,6 +63,8 @@
   services.openssh.settings.PasswordAuthentication = true;
   services.openssh.settings.PermitRootLogin = "yes";
 
+  virtualisation.docker.enable = true;
+
   #-----------------------------------------------------------------------------
   # VMware Fusion                                                              #
   #-----------------------------------------------------------------------------
@@ -117,7 +119,7 @@
 
   users.users.iypetrov = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "docker" ];
     shell = pkgs.zsh;
     initialPassword = "123";
   };

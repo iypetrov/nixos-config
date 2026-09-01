@@ -50,7 +50,7 @@ in {
     newt
 
     # Specific for me.
-    podman
+    docker
     docker-compose
     delta
     gh
