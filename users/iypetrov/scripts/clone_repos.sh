@@ -117,12 +117,12 @@ function _main() {
     _clone_or_fork_repo git@github.com:fluent/fluent-bit-go.git oss/fluent-bit-go
     _clone_or_fork_repo git@github.com:fluent/fluent-operator.git oss/fluent-operator
 
-    gh repo list "gardener" --limit 1000 --json nameWithOwner,sshUrl | jq -r '.[] | .sshUrl' | while read -r repo_url; do
+    gh repo list "gardener" --limit 1000 --json nameWithOwner,sshUrl | jq -r '.[] | .sshUrl' | while read -r _repo_url; do
         local _gardener_repo_name=$( echo "${repo_url##*/}" | sed 's/\.git$//' )
-        if [[ "${gardener_repo_name}" == "observability" ]]; then
+        if [[ "${_gardener_repo_name}" == "observability" ]]; then
             continue
         fi
-        _clone_or_fork_repo "${repo_url}" "oss/gardener-${gardener_repo_name}"
+        _clone_or_fork_repo "${_repo_url}" "oss/gardener-${_gardener_repo_name}"
     done
 }
 
