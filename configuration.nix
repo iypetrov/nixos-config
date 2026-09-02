@@ -57,38 +57,13 @@
   # For the development VM, a firewall is not needed.
   networking.firewall.enable = false;
   services.resolved.enable = true;
-  services.resolved.settings = {
-    Resolve = {
-      DNS = "172.18.255.53 fd00:ff::53";
-      Domains = "~local.gardener.cloud";
-    };
-  };
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
-  networking.extraHosts = ''
-    # Begin of Gardener local setup section
-    127.0.0.1 registry.local.gardener.cloud
-    ::1 registry.local.gardener.cloud
-
-    # oidc-apps-controller provider local setup
-    127.0.0.1 dexidp
-    127.0.0.1 plutono-garden.ingress.local.seed.local.gardener.cloud
-    127.0.0.1 prometheus-seed-garden-0.ingress.local.seed.local.gardener.cloud
-    127.0.0.1 prometheus-aggregate-garden-0.ingress.local.seed.local.gardener.cloud
-    127.0.0.1 prometheus-cache-garden-0.ingress.local.seed.local.gardener.cloud
-    127.0.0.1 vlsingle-victoria-logs-garden.ingress.local.seed.local.gardener.cloud
-    127.0.0.1 prometheus-shoot-shoot--local--local-0.ingress.local.seed.local.gardener.cloud
-    127.0.0.1 plutono-shoot--local--local.ingress.local.seed.local.gardener.cloud
-    127.0.0.1 vlsingle-victoria-logs-shoot--local--local.ingress.local.seed.local.gardener.cloud
-  '';
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = true;
   services.openssh.settings.PermitRootLogin = "yes";
 
   virtualisation.docker.enable = true;
-  virtualisation.docker.daemon.settings = {
-    insecure-registries = [ "registry.local.gardener.cloud:5001" ];
-  };
 
   #-----------------------------------------------------------------------------
   # VMware Fusion                                                              #

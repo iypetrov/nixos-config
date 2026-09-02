@@ -31,6 +31,7 @@ let
     };
   }) scriptFiles);
 in {
+  imports = [ ./fluent-bit.nix ];
   # Home Manager state version. Leave at your first-install release.
   home.stateVersion = "26.05";
   # Make ~/.local/bin (where ./scripts are linked) available on PATH.
@@ -58,6 +59,7 @@ in {
 
     # Go
     go
+    gopls
     gotools
     golangci-lint
     ginkgo
@@ -75,22 +77,23 @@ in {
     gcc
     gnumake
     cmake
+    clang-tools
     ninja
     gdb
     pkg-config
     bear
     bison
     flex
-    openssl.dev
-    libyaml.dev
 
     # Python
     python313
     python313Packages.pip
+    python3Packages.jedi-language-server
     pyenv
 
     # NodeJS
     nodejs_24
+    typescript-language-server
     yarn
 
     # Lua
@@ -103,6 +106,7 @@ in {
 
     # Terraform
     terraform
+    terraform-ls
 
     # Kubernetes
     kubectl
@@ -113,13 +117,6 @@ in {
     k9s
     kubebuilder
     kind
-
-    # LSP servers
-    gopls
-    typescript-language-server
-    clang-tools
-    python3Packages.jedi-language-server
-    terraform-ls
 
     # GUI
     ghostty
