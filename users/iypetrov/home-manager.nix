@@ -79,6 +79,10 @@ in {
     gdb
     pkg-config
     bear
+    bison
+    flex
+    openssl
+    libyaml
 
     # Python
     python313
