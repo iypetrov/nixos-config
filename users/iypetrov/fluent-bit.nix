@@ -19,5 +19,7 @@ in {
   home.sessionVariables = {
     PKG_CONFIG_PATH = lib.concatMapStringsSep ":" (p: "${p}/lib/pkgconfig") deps;
     CMAKE_PREFIX_PATH = lib.concatStringsSep ":" (map toString deps);
+    NIX_CFLAGS_COMPILE = lib.concatMapStringsSep " " (p: "-I${p}/include") deps;
+    NIX_LDFLAGS = lib.concatMapStringsSep " " (p: "-L${p}/lib") deps;
   };
 }
