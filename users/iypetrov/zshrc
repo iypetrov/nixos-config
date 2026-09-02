@@ -9,6 +9,11 @@ fi
 bindkey -v
 export EDITOR='vim'
 export KEYTIMEOUT=1
+
+# Open current command in vim for editing, execute on save+quit.
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^e" edit-command-line
 export LANG=en_US.UTF-8
 
 # Base directory for project checkouts.
