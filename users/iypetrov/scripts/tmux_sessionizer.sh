@@ -3,7 +3,7 @@
 
 set -e
 
-[[ ! $(command -v gh) ]] && echo "Error: You need to have gh installed" >&2 && return 1
+# [[ ! $(command -v gh) ]] && echo "Error: You need to have gh installed" >&2 && return 1
 [[ ! $(command -v fzf) ]] && echo "Error: You need to have fzf installed" >&2 && return 1
 [[ ! $(command -v tmux) ]] && echo "Error: You need to have tmux installed" >&2 && return 1
 
@@ -40,7 +40,7 @@ function _main() {
 
     if ! tmux has-session -t="${_curr_session}" 2> /dev/null; then
         local _repo_name="$(basename "${_target}")"
-        gh repo sync "iypetrov/${_repo_name}" 2>/dev/null || true
+        # gh repo sync "iypetrov/${_repo_name}" 2>/dev/null || true
 
         tmux new-session \
             -ds "${_curr_session}" \
