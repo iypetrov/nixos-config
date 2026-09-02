@@ -81,8 +81,8 @@ in {
     bear
     bison
     flex
-    openssl
-    libyaml
+    openssl.dev
+    libyaml.dev
 
     # Python
     python313
