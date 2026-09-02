@@ -113,7 +113,7 @@ exec_always --no-startup-id i3-msg "workspace $ws10; layout tabbed"
 focus_on_window_activation focus
 bindsym $mod+u [urgent=latest] focus
 
-exec --no-startup-id firefox
+# exec --no-startup-id firefox
 exec --no-startup-id ghostty
 
 assign [class="firefox"] $ws1
