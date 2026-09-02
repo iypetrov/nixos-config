@@ -75,7 +75,6 @@ in {
 
     # C
     gcc
-    gnumake
     cmake
     clang-tools
     ninja

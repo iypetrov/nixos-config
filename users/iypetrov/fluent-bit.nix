@@ -2,16 +2,11 @@
 
 let
   deps = with pkgs; [
-    ninja
-    gdb
-    pkg-config
-    bear
-    bison
-    flex
     openssl.dev
     libyaml.dev
     zlib.dev
     systemd.dev
+    systemd.lib
     msgpack-c
     postgresql.dev
     nghttp2.dev
