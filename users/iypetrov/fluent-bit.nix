@@ -6,7 +6,7 @@ let
     libyaml.dev
     zlib.dev
     systemd.dev
-    systemd.lib
+    systemd
     msgpack-c
     postgresql.dev
     nghttp2.dev
