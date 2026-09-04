@@ -1,7 +1,7 @@
 # https://i3wm.org/docs/userguide.html
 
 set $mod Mod1
-font pango:JetBrainsMono Nerd Font 10
+font pango:JetBrainsMono Nerd Font 8
 
 exec --no-startup-id i3_autoresize.sh
 exec --no-startup-id nm-applet
