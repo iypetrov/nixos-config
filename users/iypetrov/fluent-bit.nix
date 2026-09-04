@@ -21,5 +21,7 @@ in {
     CMAKE_PREFIX_PATH = lib.concatStringsSep ":" (map toString deps);
     NIX_CFLAGS_COMPILE = lib.concatMapStringsSep " " (p: "-I${p}/include") deps;
     NIX_LDFLAGS = lib.concatMapStringsSep " " (p: "-L${p}/lib") deps;
+    CFLAGS = lib.concatMapStringsSep " " (p: "-I${p}/include") deps;
+    LDFLAGS = lib.concatMapStringsSep " " (p: "-L${p}/lib") deps;
   };
 }
