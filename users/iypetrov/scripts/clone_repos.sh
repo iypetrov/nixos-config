@@ -121,13 +121,19 @@ function _main() {
     _clone_or_fork_repo git@github.com:fluent/fluent-bit-go.git oss/fluent-bit-go
     _clone_or_fork_repo git@github.com:fluent/fluent-operator.git oss/fluent-operator
 
-    gh repo list "gardener" --limit 1000 --json nameWithOwner,sshUrl | jq -r '.[] | .sshUrl' | while read -r _repo_url; do
-        local _gardener_repo_name=$( echo "${_repo_url##*/}" | sed 's/\.git$//' )
-        if [[ "${_gardener_repo_name}" == "observability" ]]; then
-            continue
-        fi
-        _clone_or_fork_repo "${_repo_url}" "oss/gardener-${_gardener_repo_name}"
-    done
+    # gardener
+    # gh repo list "gardener" --limit 1000 --json nameWithOwner,sshUrl | jq -r '.[] | .sshUrl' | while read -r _repo_url; do
+    #     local _gardener_repo_name=$( echo "${_repo_url##*/}" | sed 's/\.git$//' )
+    #     if [[ "${_gardener_repo_name}" == "observability" ]]; then
+    #         continue
+    #     fi
+    #     _clone_or_fork_repo "${_repo_url}" "oss/gardener-${_gardener_repo_name}"
+    # done
+    _clone_or_fork_repo git@github.com:gardener/gardener.git oss/gardener-gardener
+    _clone_or_fork_repo git@github.com:gardener/logging.git oss/gardener-logging
+    _clone_or_fork_repo git@github.com:gardener/ci-infra.git oss/gardener-ci-infra
+    _clone_or_fork_repo git@github.com:gardener/gardener-extension-otelcol.git oss/gardener-gardener-extension-otelcol
+    _clone_or_fork_repo git@github.com:gardener/oidc-apps-controller.git oss/gardener-oidc-apps-controller
 }
 
 _main "$@"
