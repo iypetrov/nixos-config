@@ -11,14 +11,22 @@ let
       hash = "sha256-wFthuVpD0tZdh76xmDs1cNKzQVtOSg69X4nPwp0Xt+U=";
     };
   };
+  vim-markdown-preview-src = pkgs.fetchFromGitHub {
+    owner = "tjhop";
+    repo = "vim-markdown-preview";
+    rev = "192f94c058a55a0bf1d56f351dd859661bef0bc6";
+    hash = "sha256-qusR7JrirFRKuDtFo5RXyBS9fw9kbKMB8ZSInkkESCY=";
+  };
   vim-markdown-preview = pkgs.vimUtils.buildVimPlugin {
     name = "vim-markdown-preview";
-    src = pkgs.fetchFromGitHub {
-      owner = "tjhop";
-      repo = "vim-markdown-preview";
-      rev = "192f94c058a55a0bf1d56f351dd859661bef0bc6";
-      hash = "sha256-qusR7JrirFRKuDtFo5RXyBS9fw9kbKMB8ZSInkkESCY=";
-    };
+    src = vim-markdown-preview-src;
+  };
+  vim-markdown-preview-bin = pkgs.buildGoModule {
+    pname = "vim-markdown-preview";
+    version = "0-unstable";
+    src = vim-markdown-preview-src;
+    subPackages = [ "cmd/vim-markdown-preview" ];
+    vendorHash = "sha256-1J8Pytb+mGmpsz81mIt2/WEKDuaeBH18jpT9oTtzARo=";
   };
 
   # Every file in ./scripts is linked into ~/.local/bin as an executable.
@@ -38,6 +46,7 @@ in {
   home.sessionPath = [ "$HOME/.local/bin" ];
   xdg.enable = true;
   home.packages = with pkgs; [
+    vim-markdown-preview-bin
     # Common utils.
     bat
     fzf
