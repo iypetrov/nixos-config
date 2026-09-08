@@ -19,6 +19,7 @@
   boot.binfmt.emulatedSystems = ["x86_64-linux"];
 
   boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "nvme" "usbhid" "sr_mod" ];
+  boot.kernelModules = [ "ip_tables" "ip6_tables" "iptable_filter" "iptable_nat" "ip6table_filter" "ip6table_nat" ];
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
     fsType = "ext4";
