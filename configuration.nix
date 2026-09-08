@@ -13,7 +13,7 @@
   boot.loader.systemd-boot.consoleMode = "0";
 
   # Be careful updating this.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_6;
 
   # Run x86_64 binaries via qemu.
   boot.binfmt.emulatedSystems = ["x86_64-linux"];
