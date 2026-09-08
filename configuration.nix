@@ -138,7 +138,12 @@
     iproute2
     openssl
   ];
-  environment.binsh = "${pkgs.bash}/bin/bash";
+  system.activationScripts.binbash = {
+    text = ''
+      ln -sf ${pkgs.bash}/bin/bash /bin/bash
+    '';
+    deps = [];
+  };
 
   # Leave at your first install's release.
   system.stateVersion = "26.05";
