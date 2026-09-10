@@ -26,5 +26,6 @@
 
   virtualisation.docker.daemon.settings = {
     insecure-registries = [ "registry.local.gardener.cloud:5001" ];
+    dns = [ "1.1.1.1" "8.8.8.8" ];
   };
 }
