@@ -230,7 +230,7 @@ let g:go_code_completion_enabled = 0
 let g:go_diagnostics_enabled = 0
 let g:go_fmt_autosave = 0
 let g:go_fmt_command = "goimports"
-let g:go_play_browser_command = 'open %URL% &'
+let g:go_play_browser_command = 'xdg-open %URL% &'
 
 augroup go_mappings
   autocmd!
