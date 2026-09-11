@@ -24,6 +24,21 @@
     127.0.0.1 vlsingle-victoria-logs-shoot--local--local.ingress.local.seed.local.gardener.cloud
   '';
 
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      listen-address = "172.17.0.1";
+      bind-interfaces = true;
+      no-resolv = true;
+      server = [ "127.0.0.53" ];
+    };
+  };
+
+  systemd.services.dnsmasq = {
+    after = [ "docker.service" ];
+    requires = [ "docker.service" ];
+  };
+
   virtualisation.docker.daemon.settings = {
     insecure-registries = [ "registry.local.gardener.cloud:5001" ];
     dns = [ "172.17.0.1" ];

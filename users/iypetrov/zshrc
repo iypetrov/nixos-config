@@ -62,6 +62,9 @@ drm() {
 
 # Kubernetes
 export KUBE_EDITOR=vim
+export KUBECONFIG_VIRTUAL="$XDG_PROJECTS_DIR"/oss/gardener-gardener/dev-setup/kubeconfigs/virtual-garden/kubeconfig
+export KUBECONFIG_RUNTIME="$XDG_PROJECTS_DIR"/oss/gardener-gardener/dev-setup/kubeconfigs/runtime/kubeconfig
+export KUBECONFIG_SHOOT="$XDG_PROJECTS_DIR"/oss/gardener-gardener/admin-kubeconf.yaml
 alias k="kubectl"
 
 autoload -Uz add-zsh-hook
