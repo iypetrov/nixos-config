@@ -137,6 +137,7 @@
     xclip
     iproute2
     openssl
+    gettext
   ];
   system.activationScripts.binbash = {
     text = ''
