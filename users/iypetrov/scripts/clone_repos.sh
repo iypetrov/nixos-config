@@ -121,6 +121,14 @@ function _main() {
     _clone_or_fork_repo git@github.com:fluent/fluent-bit-go.git oss/fluent-bit-go
     _clone_or_fork_repo git@github.com:fluent/fluent-operator.git oss/fluent-operator
 
+
+    _clone_or_fork_repo git@github.com:VictoriaMetrics/VictoriaLogs.git oss/VictoriaLogs
+    _clone_repo git@github.com:iypetrov/victoria-operator.git oss/victoria-operator master
+    # Have to do this manually, because original name of the operator is too common,
+    # so _clone_repo + manula sync of the upstream is required.
+    git -C oss/victoria-operator remote add upstream "git@github.com:VictoriaMetrics/operator.git" 2>/dev/null || true
+    echo "🔄 Upstream set for victoria-operator -> VictoriaMetrics/operator"
+
     # gardener
     # gh repo list "gardener" --limit 1000 --json nameWithOwner,sshUrl | jq -r '.[] | .sshUrl' | while read -r _repo_url; do
     #     local _gardener_repo_name=$( echo "${_repo_url##*/}" | sed 's/\.git$//' )
