@@ -121,7 +121,6 @@ function _main() {
     _clone_or_fork_repo git@github.com:fluent/fluent-bit-go.git oss/fluent-bit-go
     _clone_or_fork_repo git@github.com:fluent/fluent-operator.git oss/fluent-operator
 
-
     _clone_or_fork_repo git@github.com:VictoriaMetrics/VictoriaLogs.git oss/VictoriaLogs
     _clone_repo git@github.com:iypetrov/victoria-operator.git oss/victoria-operator master
     # Have to do this manually, because original name of the operator is too common,
@@ -142,6 +141,8 @@ function _main() {
     _clone_or_fork_repo git@github.com:gardener/ci-infra.git oss/gardener-ci-infra
     _clone_or_fork_repo git@github.com:gardener/gardener-extension-otelcol.git oss/gardener-gardener-extension-otelcol
     _clone_or_fork_repo git@github.com:gardener/oidc-apps-controller.git oss/gardener-oidc-apps-controller
+
+    _clone_or_fork_repo git@github.com:NVIDIA/nvkind.git oss/nvkind
 }
 
 _main "$@"
