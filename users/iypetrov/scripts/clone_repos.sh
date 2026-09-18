@@ -116,6 +116,8 @@ function _main() {
     _clone_repo git@github.com:iypetrov/opentelemetry-collector-1 oss/opentelemetry-collector # Had to manually fork the otel-col repo, because there was a name conflict with the Gardener's otel-col fork.
     _clone_or_fork_repo git@github.com:open-telemetry/opentelemetry-operator.git oss/opentelemetry-operator
     _clone_or_fork_repo git@github.com:open-telemetry/opentelemetry-collector-contrib.git oss/opentelemetry-collector-contrib
+    _clone_or_fork_repo git@github.com:open-telemetry/opentelemetry-collector-releases.git oss/opentelemetry-collector-releases
+    _clone_or_fork_repo git@github.com:open-telemetry/opentelemetry.io.git oss/opentelemetry.io
 
     _clone_or_fork_repo git@github.com:fluent/fluent-bit.git oss/fluent-bit
     _clone_or_fork_repo git@github.com:fluent/fluent-bit-go.git oss/fluent-bit-go
