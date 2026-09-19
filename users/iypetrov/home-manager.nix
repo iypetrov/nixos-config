@@ -58,6 +58,7 @@ in {
     ripgrep
     silver-searcher
     newt
+    perl
 
     # Specific for me.
     docker
