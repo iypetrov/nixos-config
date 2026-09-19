@@ -59,6 +59,7 @@ in {
     silver-searcher
     newt
     perl
+    hugo
 
     # Specific for me.
     docker
