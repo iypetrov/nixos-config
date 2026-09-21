@@ -138,6 +138,8 @@
     iproute2
     openssl
     gettext
+    bpftrace
+    config.boot.kernelPackages.bcc
   ];
   system.activationScripts.binbash = {
     text = ''
