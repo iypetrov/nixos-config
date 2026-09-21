@@ -46,6 +46,33 @@ alias ag="ag --hidden"
 alias pbcopy="xclip -selection clipboard"
 alias pbpaste="xclip -selection clipboard -o"
 
+# whiptail
+export NEWT_COLORS='
+    root=white,black
+    border=brown,black
+    window=lightgray,black
+    shadow=gray,black
+    title=yellow,black
+    button=yellow,brown
+    actbutton=white,brown
+    compactbutton=brown,black
+    checkbox=lightgray,black
+    actcheckbox=yellow,brown
+    entry=yellow,brown
+    disentry=gray,brown
+    label=white,black
+    listbox=gray,black
+    actlistbox=black,brown
+    sellistbox=lightgray,green
+    actsellistbox=white,brown
+    textbox=white,black
+    acttextbox=black,cyan
+    emptyscale=,gray
+    fullscale=,brown
+    helpline=white,black
+    roottext=lightgrey,black
+'
+
 # Terraform
 alias tf="terraform"
 alias tfv="terraform validate"
