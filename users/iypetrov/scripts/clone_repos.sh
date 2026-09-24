@@ -138,6 +138,7 @@ function _main() {
     _clone_or_fork_repo git@github.com:kube-rbac-proxy/kube-rbac-proxy.git oss/kube-rbac-proxy
     _clone_or_fork_repo git@github.com:kubernetes/client-go.git oss/kube-client-go
     _clone_or_fork_repo git@github.com:kubernetes-sigs/controller-runtime.git oss/controller-runtime
+    _clone_or_fork_repo git@github.com:NVIDIA/nvkind.git oss/nvkind
 
     ## Gardener
     # gh repo list "gardener" --limit 1000 --json nameWithOwner,sshUrl | jq -r '.[] | .sshUrl' | while read -r _repo_url; do
@@ -152,8 +153,6 @@ function _main() {
     _clone_or_fork_repo git@github.com:gardener/ci-infra.git oss/gardener-ci-infra
     _clone_or_fork_repo git@github.com:gardener/gardener-extension-otelcol.git oss/gardener-gardener-extension-otelcol
     _clone_or_fork_repo git@github.com:gardener/oidc-apps-controller.git oss/gardener-oidc-apps-controller
-
-    _clone_or_fork_repo git@github.com:NVIDIA/nvkind.git oss/nvkind
 }
 
 _main "$@"
