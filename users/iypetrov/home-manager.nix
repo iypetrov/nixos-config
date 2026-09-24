@@ -66,6 +66,7 @@ in {
     delta
     gh
     claude-code
+    gdu
 
     # Go
     go
