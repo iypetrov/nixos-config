@@ -73,6 +73,7 @@ in {
     gopls
     gotools
     golangci-lint
+    delve
     ginkgo
     air
     sqlc
