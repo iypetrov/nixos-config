@@ -140,6 +140,7 @@
     gettext
     bpftrace
     config.boot.kernelPackages.bcc
+    cfssl
   ];
   system.activationScripts.binbash = {
     text = ''
