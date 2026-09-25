@@ -153,6 +153,7 @@ function _main() {
     _clone_or_fork_repo git@github.com:gardener/ci-infra.git oss/gardener-ci-infra
     _clone_or_fork_repo git@github.com:gardener/gardener-extension-otelcol.git oss/gardener-gardener-extension-otelcol
     _clone_or_fork_repo git@github.com:gardener/oidc-apps-controller.git oss/gardener-oidc-apps-controller
+    _clone_or_fork_repo git@github.com:gardener/dashboard.git oss/gardener-dashboard
 }
 
 _main "$@"
