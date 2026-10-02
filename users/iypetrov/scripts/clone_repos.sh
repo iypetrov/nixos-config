@@ -127,7 +127,8 @@ function _main() {
     _clone_or_fork_repo git@github.com:fluent/fluent-operator.git oss/fluent-operator
     # Have to do this manually, because original name of the library matches with
     # my fork of Golang.
-    git -C oss/go-codec remote add upstream "git@github.com:iypetrov/go-1.git" 2>/dev/null || true
+    _clone_repo git@github.com:iypetrov/go-codec.git oss/go-codec
+    git -C "${XDG_PROJECTS_DIR}/oss/go-codec" remote add upstream "git@github.com:ugorji/go.git" 2>/dev/null || true
     echo "🔄 Upstream set for go-codec -> ugorji/go"
 
     ## VictoriaLogs
