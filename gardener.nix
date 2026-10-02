@@ -3,9 +3,8 @@
 {
   services.resolved.settings = {
     Resolve = {
-      DNS = "172.18.255.53 fd00:ff::53";
-      Domains = "~local.gardener.cloud";
-      FallbackDNS = "1.1.1.1 8.8.8.8";
+      DNS = "1.1.1.1 8.8.8.8 172.18.255.53 fd00:ff::53";
+      Domains = "local.gardener.cloud";
     };
   };
 
