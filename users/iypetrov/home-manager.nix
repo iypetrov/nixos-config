@@ -68,6 +68,7 @@ in {
     gh
     claude-code
     gdu
+    cri-tools
 
     # Go
     go
