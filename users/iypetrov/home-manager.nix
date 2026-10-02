@@ -69,6 +69,7 @@ in {
     claude-code
     gdu
     cri-tools
+    brotli
 
     # Go
     go
