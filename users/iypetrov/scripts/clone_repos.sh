@@ -125,13 +125,16 @@ function _main() {
     _clone_or_fork_repo git@github.com:fluent/fluent-bit.git oss/fluent-bit
     _clone_or_fork_repo git@github.com:fluent/fluent-bit-go.git oss/fluent-bit-go
     _clone_or_fork_repo git@github.com:fluent/fluent-operator.git oss/fluent-operator
-    _clone_or_fork_repo git@github.com:ugorji/go.git oss/go-codec
+    # Have to do this manually, because original name of the library matches with
+    # my fork of Golang.
+    git -C oss/go-codec remote add upstream "git@github.com:iypetrov/go-1.git" 2>/dev/null || true
+    echo "🔄 Upstream set for go-codec -> ugorji/go"
 
     ## VictoriaLogs
     _clone_or_fork_repo git@github.com:VictoriaMetrics/VictoriaLogs.git oss/VictoriaLogs
     _clone_repo git@github.com:iypetrov/victoria-operator.git oss/victoria-operator master
     # Have to do this manually, because original name of the operator is too common,
-    # so _clone_repo + manula sync of the upstream is required.
+    # so _clone_repo + manual sync of the upstream is required.
     git -C oss/victoria-operator remote add upstream "git@github.com:VictoriaMetrics/operator.git" 2>/dev/null || true
     echo "🔄 Upstream set for victoria-operator -> VictoriaMetrics/operator"
 
