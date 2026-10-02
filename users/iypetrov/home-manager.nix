@@ -59,6 +59,7 @@ in {
     silver-searcher
     newt
     perl
+    lsof
 
     # Specific for me.
     docker
