@@ -125,6 +125,7 @@ function _main() {
     _clone_or_fork_repo git@github.com:fluent/fluent-bit.git oss/fluent-bit
     _clone_or_fork_repo git@github.com:fluent/fluent-bit-go.git oss/fluent-bit-go
     _clone_or_fork_repo git@github.com:fluent/fluent-operator.git oss/fluent-operator
+    _clone_or_fork_repo git@github.com:ugorji/go.git oss/go-codec
 
     ## VictoriaLogs
     _clone_or_fork_repo git@github.com:VictoriaMetrics/VictoriaLogs.git oss/VictoriaLogs
