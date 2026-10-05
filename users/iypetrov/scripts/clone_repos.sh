@@ -139,6 +139,11 @@ function _main() {
     git -C oss/victoria-operator remote add upstream "git@github.com:VictoriaMetrics/operator.git" 2>/dev/null || true
     echo "🔄 Upstream set for victoria-operator -> VictoriaMetrics/operator"
 
+    ## Prometheus
+    _clone_or_fork_repo git@github.com:prometheus/prometheus.git oss/prometheus
+    _clone_or_fork_repo git@github.com:prometheus-operator/prometheus-operator.git oss/prometheus-operator
+    _clone_or_fork_repo git@github.com:prometheus/client_golang.git oss/prometheus_client_golang
+
     ## Kubernetes
     _clone_or_fork_repo git@github.com:kube-rbac-proxy/kube-rbac-proxy.git oss/kube-rbac-proxy
     _clone_or_fork_repo git@github.com:kubernetes/client-go.git oss/kube-client-go
