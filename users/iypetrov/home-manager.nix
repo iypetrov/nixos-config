@@ -63,6 +63,10 @@ in {
     sqlite
 
     # Specific for me.
+    ghostty
+    rofi
+    dex                    # XDG autostart (dex --autostart)
+    networkmanagerapplet   # nm-applet tray
     docker
     docker-compose
     delta
@@ -132,14 +136,6 @@ in {
     k9s
     kubebuilder
     kind
-
-    # GUI
-    ghostty
-    rofi
-
-    # i3
-    dex                    # XDG autostart (dex --autostart)
-    networkmanagerapplet   # nm-applet tray
   ];
 
   #-----------------------------------------------------------------------------
