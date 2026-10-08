@@ -60,6 +60,7 @@ in {
     newt
     perl
     lsof
+    sqlite
 
     # Specific for me.
     docker
