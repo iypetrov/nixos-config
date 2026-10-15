@@ -149,6 +149,7 @@ function _main() {
     _clone_or_fork_repo git@github.com:kubernetes/client-go.git oss/kube-client-go
     _clone_or_fork_repo git@github.com:kubernetes-sigs/controller-runtime.git oss/controller-runtime
     _clone_or_fork_repo git@github.com:NVIDIA/nvkind.git oss/nvkind
+    _clone_or_fork_repo git@github.com:yannh/kubeconform.git oss/kubeconform
 
     ## Gardener
     # gh repo list "gardener" --limit 1000 --json nameWithOwner,sshUrl | jq -r '.[] | .sshUrl' | while read -r _repo_url; do
