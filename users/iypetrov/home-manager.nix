@@ -137,6 +137,7 @@ in {
     kubebuilder
     kind
     kyverno-chainsaw
+    controller-gen
   ];
 
   #-----------------------------------------------------------------------------
