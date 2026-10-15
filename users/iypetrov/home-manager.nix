@@ -122,6 +122,7 @@ in {
     skaffold
     opentelemetry-collector-builder
     apacheHttpd
+    kubernetes-controller-tools
 
     # Terraform
     terraform
@@ -137,7 +138,6 @@ in {
     kubebuilder
     kind
     kyverno-chainsaw
-    controller-gen
   ];
 
   #-----------------------------------------------------------------------------
