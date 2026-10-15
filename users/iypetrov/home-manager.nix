@@ -61,6 +61,7 @@ in {
     perl
     lsof
     sqlite
+    unzip
 
     # Specific for me.
     ghostty
