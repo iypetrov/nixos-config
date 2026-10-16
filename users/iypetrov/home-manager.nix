@@ -11,6 +11,15 @@ let
       hash = "sha256-wFthuVpD0tZdh76xmDs1cNKzQVtOSg69X4nPwp0Xt+U=";
     };
   };
+  wiki-vim = pkgs.vimUtils.buildVimPlugin {
+    name = "wiki-vim";
+    src = pkgs.fetchFromGitHub {
+      owner = "lervag";
+      repo = "wiki.vim";
+      rev = "ccec4d24bf5dbc7f062271a793fdf34cd857f4b4";
+      hash = "sha256-wFthuVpD0tZdh76xmDs1cNKzQVtOSg69X4nPwp0Xt+U=";
+    };
+  };
   vim-markdown-preview-src = pkgs.fetchFromGitHub {
     owner = "tjhop";
     repo = "vim-markdown-preview";
