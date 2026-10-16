@@ -194,6 +194,7 @@ in {
       asyncomplete-vim
       asyncomplete-lsp-vim
       vim-go
+      vimplugin-org-roam.nvim
     ]) ++ [
       zazen
       vim-markdown-preview
