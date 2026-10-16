@@ -141,6 +141,9 @@ let g:gitgutter_sign_removed = '-'
 " undotree
 nmap <leader>h :UndotreeToggle<CR>
 
+" wiki.vim
+let g:wiki_root = '~/wiki'
+
 " vim-lsp
 let g:lsp_diagnostics_virtual_text_enabled = 1
 let g:lsp_diagnostics_virtual_text_align = 'after'
