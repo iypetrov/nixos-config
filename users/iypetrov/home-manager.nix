@@ -205,6 +205,7 @@ in {
       vim-go
     ]) ++ [
       zazen
+      wiki-vim
       vim-markdown-preview
     ];
     extraConfig = builtins.readFile ./vimrc;
