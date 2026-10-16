@@ -102,6 +102,7 @@ function _clone_or_fork_repo() {
 function _main() {
     # common
     _clone_repo git@github.com:iypetrov/nixos-config.git common/nixos-config
+    _clone_repo git@github.com:iypetrov/zettelkasten.git personal/zettelkasten
 
     # personal
     _clone_repo git@github.com:iypetrov/go-playground.git personal/go-playground
