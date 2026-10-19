@@ -144,7 +144,8 @@ let g:gitgutter_sign_removed = '-'
 nmap <leader>h :UndotreeToggle<CR>
 
 " vimwiki
-let g:vimwiki_list = [{ 'syntax': 'markdown',
+let g:vimwiki_list = [{ 'path': '/home/iypetrov/projects/common/zettelkasten',
+                      \ 'syntax': 'markdown',
                       \ 'ext': 'md'}]
 
 " vim-zettel
