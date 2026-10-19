@@ -144,12 +144,13 @@ let g:gitgutter_sign_removed = '-'
 nmap <leader>h :UndotreeToggle<CR>
 
 " vimwiki
-let g:vimwiki_list = [{ 'path': '/home/iypetrov/projects/common/zettelkasten',
+let g:vimwiki_list = [{ 'path': '~/projects/common/zettelkasten',
                       \ 'syntax': 'markdown',
                       \ 'ext': 'md'}]
 
 " vim-zettel
-let g:nv_search_paths = ['/home/iypetrov/projects/common/zettelkasten']
+let g:zettel_options = [{"template" :  "~/projects/common/zettelkasten/template.tpl"}]
+let g:nv_search_paths = ['~/projects/common/zettelkasten']
 
 " vim-lsp
 let g:lsp_diagnostics_virtual_text_enabled = 1
