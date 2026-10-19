@@ -203,6 +203,8 @@ in {
       asyncomplete-vim
       asyncomplete-lsp-vim
       vim-go
+      vimwiki
+      vim-zettel
     ]) ++ [
       zazen
       wiki-vim
