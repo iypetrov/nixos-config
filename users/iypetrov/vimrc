@@ -25,6 +25,8 @@ set sessionoptions="curdir,folds,help,options,tabpages,winsize"
 
 let g:loaded_matchparen = 1
 syntax on                 " Enable filetype detection by syntax.
+set nocompatible          " Disables compatibility with the original Vi.
+filetype plugin on        " Enables filetype detection and filetype-specific plugins.
 
 " Backup settings
 set nobackup
@@ -141,8 +143,12 @@ let g:gitgutter_sign_removed = '-'
 " undotree
 nmap <leader>h :UndotreeToggle<CR>
 
-" wiki.vim
-let g:wiki_root = '~/wiki'
+" vimwiki
+let g:vimwiki_list = [{ 'syntax': 'markdown',
+                      \ 'ext': 'md'}]
+
+" vim-zettel
+let g:nv_search_paths = ['/home/iypetrov/projects/common/zettelkasten']
 
 " vim-lsp
 let g:lsp_diagnostics_virtual_text_enabled = 1
