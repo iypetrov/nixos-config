@@ -157,6 +157,7 @@ let g:zettel_options = [
   \ {"rel_path": "permanent/",
   \  "front_matter": [["tags", ""]]}]
 let g:zettel_format = "%y%m%d-%H%M-%title"
+let g:zettel_filename_sanitize = 1
 
 nmap <leader>zi :Inbox<CR>
 nmap <leader>zp :ZettelNew<space>
