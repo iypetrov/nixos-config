@@ -149,17 +149,18 @@ let g:vimwiki_list = [{ 'path': '~/projects/common/zettelkasten',
                       \ 'ext': 'md'}]
 
 " vim-zettel
+command! Inbox execute 'edit ~/projects/common/zettelkasten/inbox/' . strftime('%y%m%d-%H%M') . '.md'
+
 let g:vimwiki_list = [
   \ {'path': '~/projects/common/zettelkasten/', 'ext': '.md', 'syntax': 'markdown'}]
-
 let g:zettel_options = [
   \ {"rel_path": "permanent/",
   \  "front_matter": [["tags", ""]]}]
-
 let g:zettel_format = "%y%m%d-%H%M-%title"
 
-" plain, front-matter-free inbox note
-command! Inbox execute 'edit ~/projects/common/zettelkasten/inbox/' . strftime('%y%m%d-%H%M') . '.md'
+nmap <leader>zi :Inbox<CR>
+nmap <leader>zp :ZettelNew<space>
+nmap <leader>zyy :ZettelNew<CR>
 
 " vim-lsp
 let g:lsp_diagnostics_virtual_text_enabled = 1
