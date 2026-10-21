@@ -159,7 +159,7 @@ let g:zettel_options = [
 let g:zettel_format = "%y%m%d-%H%M-%title"
 
 " plain, front-matter-free inbox note
-command! Inbox execute 'edit ~/notes/inbox/' . strftime('%y%m%d-%H%M') . '.md'
+command! Inbox execute 'edit ~/projects/common/zettelkasten/inbox/' . strftime('%y%m%d-%H%M') . '.md'
 
 " vim-lsp
 let g:lsp_diagnostics_virtual_text_enabled = 1
