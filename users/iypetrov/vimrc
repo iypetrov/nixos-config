@@ -147,9 +147,11 @@ nmap <leader>h :UndotreeToggle<CR>
 let g:vimwiki_list = [{ 'path': '~/projects/common/zettelkasten',
                       \ 'syntax': 'markdown',
                       \ 'ext': 'md'}]
+nmap <leader>zi :VimwikiIndex<CR>
+nmap <leader>zgr :VimwikiBacklinks<CR>
 
 " vim-zettel
-command! Inbox execute 'edit ~/projects/common/zettelkasten/inbox/' . strftime('%y%m%d-%H%M') . '.md'
+command! Fleet execute 'edit ~/projects/common/zettelkasten/fleet/' . strftime('%y%m%d-%H%M') . '.md'
 
 let g:vimwiki_list = [
   \ {'path': '~/projects/common/zettelkasten/', 'ext': '.md', 'syntax': 'markdown'}]
@@ -159,7 +161,7 @@ let g:zettel_options = [
 let g:zettel_format = "%title"
 let g:zettel_filename_sanitize = 1
 
-nmap <leader>zi :Inbox<CR>
+nmap <leader>zf :Fleet<CR>
 nmap <leader>zp :ZettelNew<space>
 nmap <leader>zyy :ZettelYankName<CR>
 
