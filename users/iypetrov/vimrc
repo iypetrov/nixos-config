@@ -168,7 +168,8 @@ let g:vimwiki_list = [
 let g:zettel_options = [
   \ {"front_matter": [["tags", ""]]}]
 nmap <leader>zi :edit ~/projects/common/zettelkasten/index.md<CR>
-nmap <leader>zgr :call <SID>fzf_backlinks()<CR>
+nmap <leader>zt :ZettelSearch tags:.*
+nmap <leader>bl :call <SID>fzf_backlinks()<CR>
 
 " vim-zettel
 command! Fleet execute 'edit ~/projects/common/zettelkasten/fleet/' . strftime('%y%m%d-%H%M') . '.md'
