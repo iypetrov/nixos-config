@@ -144,11 +144,27 @@ let g:gitgutter_sign_removed = '-'
 nmap <leader>h :UndotreeToggle<CR>
 
 " vimwiki
+function! s:fzf_backlinks()
+  let current = expand('%:t:r')
+  let pattern = printf('"\(.*%s\.?m?d?\)"', current)   " same grep_link_pattern as ZettelBackLinks
+  let files = zettel#vimwiki#wikigrep(pattern)
+  if empty(files)
+    echom 'No backlinks found'
+    return
+  endif
+  call fzf#run(fzf#wrap({
+    \ 'source':  files,
+    \ 'sink':    function('zettel#fzf#search_open'),
+    \ 'options': '--prompt="Backlinks> " --preview "bat --color=always {}"',
+    \ 'down':    '40%',
+    \ }))
+endfunction
+
 let g:vimwiki_list = [{ 'path': '~/projects/common/zettelkasten',
                       \ 'syntax': 'markdown',
                       \ 'ext': 'md'}]
 nmap <leader>zi :VimwikiIndex<CR>
-nmap <leader>zgr :VimwikiBacklinks<CR>
+nmap <leader>zgr :call <SID>s:fzf_backlinks()<CR>
 
 " vim-zettel
 command! Fleet execute 'edit ~/projects/common/zettelkasten/fleet/' . strftime('%y%m%d-%H%M') . '.md'
