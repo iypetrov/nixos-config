@@ -106,6 +106,9 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Don't fold anything.
 autocmd BufWinEnter * set foldlevel=999999
 
+" vimwiki triggers spell checks without spell being configured.
+autocmd FileType vimwiki setlocal nospell
+
 set termguicolors
 set background=dark
 colorscheme zazen
