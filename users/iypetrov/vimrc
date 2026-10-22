@@ -167,7 +167,7 @@ let g:vimwiki_list = [{ 'path': '~/projects/common/zettelkasten',
                       \ 'syntax': 'markdown',
                       \ 'ext': 'md'}]
 nmap <leader>zi :VimwikiIndex<CR>
-nmap <leader>zgr :call <SID>s:fzf_backlinks()<CR>
+nmap <leader>zgr :call <SID>fzf_backlinks()<CR>
 
 " vim-zettel
 command! Fleet execute 'edit ~/projects/common/zettelkasten/fleet/' . strftime('%y%m%d-%H%M') . '.md'
