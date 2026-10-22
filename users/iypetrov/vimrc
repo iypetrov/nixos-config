@@ -164,7 +164,7 @@ function! s:fzf_backlinks()
 endfunction
 
 let g:vimwiki_list = [
-  \ {'path': '~/projects/common/zettelkasten/permanent/', 'ext': '.md', 'syntax': 'markdown'}]
+  \ {'path': '~/projects/common/zettelkasten/', 'ext': '.md', 'syntax': 'markdown'}]
 let g:zettel_options = [
   \ {"front_matter": [["tags", ""]]}]
 nmap <leader>zi :edit ~/projects/common/zettelkasten/index.md<CR>
