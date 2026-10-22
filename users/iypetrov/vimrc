@@ -157,7 +157,7 @@ function! s:fzf_backlinks()
   endif
   call fzf#run(fzf#wrap({
     \ 'source':  files,
-    \ 'sink':    function('zettel#fzf#search_open'),
+    \ 'sink':    {f -> vimwiki#base#open_link(':e ', fnamemodify(f, ':~:.'), zettel#vimwiki#path())},
     \ 'options': '--prompt="Backlinks> " --preview "bat --color=always {}"',
     \ 'down':    '40%',
     \ }))
