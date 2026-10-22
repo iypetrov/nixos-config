@@ -168,7 +168,7 @@ let g:vimwiki_list = [
 let g:zettel_options = [
   \ {"front_matter": [["tags", ""]]}]
 nmap <leader>zi :edit ~/projects/common/zettelkasten/index.md<CR>
-nmap <leader>zt :ZettelSearch tags:.*
+nmap <leader>zt :VimwikiSearch /tags:.*
 nmap <leader>bl :call <SID>fzf_backlinks()<CR>
 
 " vim-zettel
