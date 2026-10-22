@@ -163,20 +163,15 @@ function! s:fzf_backlinks()
     \ }))
 endfunction
 
-let g:vimwiki_list = [{ 'path': '~/projects/common/zettelkasten',
-                      \ 'syntax': 'markdown',
-                      \ 'ext': 'md'}]
-nmap <leader>zi :VimwikiIndex<CR>
+let g:vimwiki_list = [
+  \ {'path': '~/projects/common/zettelkasten/permanent/', 'ext': '.md', 'syntax': 'markdown'}]
+let g:zettel_options = [
+  \ {"front_matter": [["tags", ""]]}]
+nmap <leader>zi :edit ~/projects/common/zettelkasten/index.md<CR>
 nmap <leader>zgr :call <SID>fzf_backlinks()<CR>
 
 " vim-zettel
 command! Fleet execute 'edit ~/projects/common/zettelkasten/fleet/' . strftime('%y%m%d-%H%M') . '.md'
-
-let g:vimwiki_list = [
-  \ {'path': '~/projects/common/zettelkasten/', 'ext': '.md', 'syntax': 'markdown'}]
-let g:zettel_options = [
-  \ {"rel_path": "permanent/",
-  \  "front_matter": [["tags", ""]]}]
 let g:zettel_format = "%title"
 let g:zettel_filename_sanitize = 1
 
