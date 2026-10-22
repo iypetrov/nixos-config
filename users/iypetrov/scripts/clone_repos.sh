@@ -108,6 +108,7 @@ function _main() {
     _clone_repo git@github.com:iypetrov/go-playground.git personal/go-playground
     _clone_repo git@github.com:iypetrov/aws-playground.git personal/aws-playground
     _clone_repo git@github.com:iypetrov/k8s-playground.git personal/k8s-playground
+    _clone_repo git@github.com:iypetrov/logql-to-logsql.git personal/logql-to-logsql
 
     # ip812
     _clone_repo git@github.com:ip812/infra.git ip812/infra
