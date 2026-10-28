@@ -13,13 +13,18 @@ _PROJECT_DIR="${_SCRIPT_DIR}/.."
 
 # Main entrypoint
 function _main() {
-    local _target="$(find "${XDG_PROJECTS_DIR}" \
-        -mindepth 2 \
-        -maxdepth 2 \
-        -type d \
-        -print | \
-        sed "s|${XDG_PROJECTS_DIR}/||" | \
-        fzf)"
+    local _target
+    if [[ -n "$1" ]]; then
+        _target="$1"
+    else
+        _target="$(find "${XDG_PROJECTS_DIR}" \
+            -mindepth 2 \
+            -maxdepth 2 \
+            -type d \
+            -print | \
+            sed "s|${XDG_PROJECTS_DIR}/||" | \
+            fzf)"
+    fi
     if [[ -z "${_target}" ]]; then
         exit 0
     fi
