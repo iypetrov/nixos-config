@@ -120,7 +120,7 @@ let g:lightline = {
       \ }
 
 " vim-markdown-preview
-nmap <C-m> <Plug>MarkdownPreviewToggle
+nmap <leader>m <Plug>MarkdownPreviewToggle
 
 " ctrlp
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore ".git" --ignore "node_modules" --ignore "dist" --ignore "target" --ignore "vendor" --ignore "tmp" --ignore ".terraform"'
