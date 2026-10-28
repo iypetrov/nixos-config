@@ -171,7 +171,7 @@ nmap <leader>bl :call <SID>fzf_backlinks()<CR>
 
 " vim-zettel
 command! Fleet execute 'edit ~/projects/common/zettelkasten/fleet/' . strftime('%y%m%d-%H%M') . '.md'
-command! Daily execute 'edit ~/projects/common/zettelkasten/daily/' . strftime('%Y%m%d') . '.md'
+command! Daily execute 'edit ~/projects/common/zettelkasten/daily/' . strftime('%Y%m%d') . '.md' | silent! call setline(1, '- [ ] TODO')
 let g:zettel_format = "%title"
 let g:zettel_filename_sanitize = 1
 
