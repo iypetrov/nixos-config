@@ -171,10 +171,12 @@ nmap <leader>bl :call <SID>fzf_backlinks()<CR>
 
 " vim-zettel
 command! Fleet execute 'edit ~/projects/common/zettelkasten/fleet/' . strftime('%y%m%d-%H%M') . '.md'
+command! Daily execute 'edit ~/projects/common/zettelkasten/daily/' . strftime('%Y%m%d') . '.md'
 let g:zettel_format = "%title"
 let g:zettel_filename_sanitize = 1
 
 nmap <leader>zf :Fleet<CR>
+nmap <leader>zd :Daily<CR>
 nmap <leader>zp :ZettelNew<space>
 nmap <leader>zyy :ZettelYankName<CR>
 
