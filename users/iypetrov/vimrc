@@ -169,7 +169,7 @@ nmap <leader>zi :edit ~/projects/common/zettelkasten/index.md<CR>
 function! s:fzf_tags(tag)
   VimwikiRebuildTags!
   call vimwiki#tags#search_tags(a:tag)
-  let qflist = getqflist()
+  let qflist = getloclist(0)
   if empty(qflist)
     echom 'No notes found for tag: ' . a:tag
     return
