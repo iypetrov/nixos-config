@@ -189,6 +189,11 @@ nmap <leader>zt :VimwikiRebuildTags!<CR>:ZettelSearchTags<space>
 nmap <leader>bl :call <SID>fzf_backlinks()<CR>
 
 " vim-zettel
+autocmd BufNewFile ~/projects/common/zettelkasten/*.md
+  \ if expand('%:p') !~# '/daily/' && expand('%:p') !~# '/fleet/'
+  \ | call append(line('$'), ['', '# References', ''])
+  \ | endif
+
 command! Fleet execute 'edit ~/projects/common/zettelkasten/fleet/' . strftime('%y%m%d-%H%M') . '.md'
 command! Daily execute 'edit ~/projects/common/zettelkasten/daily/' . strftime('%Y%m%d') . '.md' | silent! call setline(1, '- [ ] TODO')
 let g:zettel_format = "%title"
