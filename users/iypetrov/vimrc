@@ -97,8 +97,8 @@ cmap w!! %!sudo tee > /dev/null %
 " Buffer management
 nnoremap <leader>d   :bd<cr>
 
-" Copy path to a directory of the current file in a Git repository.
-nnoremap <leader>x :let @+ = substitute(expand('%:p:h'), system('git rev-parse --show-toplevel')->trim() . '/', '', '')<CR>
+" Copy path (including filename) of the current file in a Git repository.
+nnoremap <leader>x :let @+ = substitute(expand('%:p'), system('git rev-parse --show-toplevel')->trim() . '/', '', '')<CR>
 
 " Clear whitespace at the end of lines automatically.
 autocmd BufWritePre * :%s/\s\+$//e
@@ -166,7 +166,7 @@ endfunction
 let g:vimwiki_list = [
   \ {'path': '~/projects/common/zettelkasten/', 'ext': '.md', 'syntax': 'markdown'}]
 nmap <leader>zi :edit ~/projects/common/zettelkasten/index.md<CR>
-nmap <leader>zt :VimwikiRebuildTags! <Bar> VimwikiSearchTags<CR>
+nmap <leader>zt :VimwikiRebuildTags!<CR>:VimwikiSearchTags<space>
 nmap <leader>bl :call <SID>fzf_backlinks()<CR>
 
 " vim-zettel
