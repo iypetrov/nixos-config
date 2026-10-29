@@ -168,22 +168,23 @@ let g:vimwiki_list = [
 nmap <leader>zi :edit ~/projects/common/zettelkasten/index.md<CR>
 function! s:fzf_tags(tag)
   VimwikiRebuildTags!
-  execute 'VimwikiSearchTags' a:tag
+  call vimwiki#tags#search_tags(a:tag)
   let qflist = getqflist()
   if empty(qflist)
     echom 'No notes found for tag: ' . a:tag
     return
   endif
-  let entries = map(qflist, {_, e -> bufname(e.bufnr) . ':' . e.lnum . ': ' . trim(e.text)})
+  let wiki_path = expand(g:vimwiki_list[0].path)
+  let entries = map(qflist, {_, e -> fnamemodify(bufname(e.bufnr), ':p') . ':' . e.lnum})
   call fzf#run(fzf#wrap({
     \ 'source':  entries,
-    \ 'sink':    {line -> execute('edit +' . split(line, ':')[1] . ' ' . split(line, ':')[0])},
-    \ 'options': '--prompt="Tags> " --preview "bat --color=always {1}" --preview-window right:60%',
+    \ 'sink':    {line -> execute('edit +' . split(line, ':')[-1] . ' ' . join(split(line, ':')[:-2], ':'))},
+    \ 'options': '--prompt="Tags> " --delimiter : --preview "bat --color=always --highlight-line {2} {1}" --preview-window right:60%',
     \ 'down':    '40%',
     \ }))
 endfunction
 
-command! -nargs=1 -complete=customlist,vimwiki#tags#complete_tags ZettelSearchTags call s:fzf_tags(<q-args>)
+command! -nargs=1 -complete=custom,vimwiki#tags#complete_tags ZettelSearchTags call s:fzf_tags(<q-args>)
 nmap <leader>zt :VimwikiRebuildTags!<CR>:ZettelSearchTags<space>
 nmap <leader>bl :call <SID>fzf_backlinks()<CR>
 
