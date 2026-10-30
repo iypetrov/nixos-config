@@ -189,16 +189,12 @@ nmap <leader>zt :VimwikiRebuildTags!<CR>:ZettelSearchTags<space>
 nmap <leader>bl :call <SID>fzf_backlinks()<CR>
 
 " vim-zettel
-autocmd BufNewFile ~/projects/common/zettelkasten/*.md
-  \ if expand('%:p') !~# '/daily/' && expand('%:p') !~# '/fleet/'
-  \ | call append(line('$'), ['', '# References', ''])
-  \ | endif
-
 command! Fleet execute 'edit ~/projects/common/zettelkasten/fleet/' . strftime('%y%m%d-%H%M') . '.md'
 command! Daily execute 'edit ~/projects/common/zettelkasten/daily/' . strftime('%Y%m%d') . '.md' | silent! call setline(1, '- [ ] TODO')
 let g:zettel_format = "%title"
 let g:zettel_options = [
-  \ {"front_matter": [["tags", ""]]}]
+  \ {"front_matter": [["tags", ""]],
+  \  "template": "~/projects/common/zettelkasten/permanent.tpl"}]
 let g:zettel_filename_sanitize = 1
 
 nmap <leader>zf :Fleet<CR>
