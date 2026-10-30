@@ -193,7 +193,7 @@ command! Fleet execute 'edit ~/projects/common/zettelkasten/fleet/' . strftime('
 command! Daily execute 'edit ~/projects/common/zettelkasten/daily/' . strftime('%Y%m%d') . '.md' | silent! call setline(1, '- [ ] TODO')
 let g:zettel_format = "%title"
 let g:zettel_options = [
-  \ {"front_matter": [["tags", ""]],
+  \ {"disable_front_matter": 1,
   \  "template": "~/projects/common/zettelkasten/permanent.tpl"}]
 let g:zettel_filename_sanitize = 1
 
