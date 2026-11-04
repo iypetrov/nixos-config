@@ -60,7 +60,7 @@ in {
     bat
     fzf
     jq
-    yq
+    yq-go
     parallel
     tree
     watch
