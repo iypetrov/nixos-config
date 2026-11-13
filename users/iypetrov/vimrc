@@ -148,16 +148,17 @@ nmap <leader>h :UndotreeToggle<CR>
 
 " vimwiki
 function! s:fzf_backlinks()
-  let current = expand('%:t:r')
-  let pattern = printf('"\(.*%s\.?m?d?\)"', current)   " same grep_link_pattern as ZettelBackLinks
-  let files = zettel#vimwiki#wikigrep(pattern)
-  if empty(files)
+  VimwikiBacklinks
+  let qflist = getloclist(0)
+  if empty(qflist)
     echom 'No backlinks found'
     return
   endif
+  let entries = map(qflist, {_, e -> fnamemodify(bufname(e.bufnr), ':p')})
+  call uniq(entries)
   call fzf#run(fzf#wrap({
-    \ 'source':  files,
-    \ 'sink':    {f -> vimwiki#base#open_link(':e ', fnamemodify(f, ':~:.'), zettel#vimwiki#path())},
+    \ 'source':  entries,
+    \ 'sink':    {f -> execute('edit ' . fnameescape(f))},
     \ 'options': '--prompt="Backlinks> " --preview "bat --color=always {}"',
     \ 'down':    '40%',
     \ }))
@@ -192,6 +193,7 @@ nmap <leader>bl :call <SID>fzf_backlinks()<CR>
 command! Fleet execute 'edit ~/projects/common/zettelkasten/fleet/' . strftime('%y%m%d-%H%M') . '.md'
 command! Daily execute 'edit ~/projects/common/zettelkasten/daily/' . strftime('%Y%m%d') . '.md' | silent! call setline(1, '- [ ] TODO')
 let g:zettel_format = "%title"
+let g:zettel_link_format = "[%title](%link)"
 let g:zettel_options = [
   \ {"disable_front_matter": 1,
   \  "template": "~/projects/common/zettelkasten/permanent.tpl"}]
