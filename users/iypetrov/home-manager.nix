@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, pkgs-unstable, ... }:
 
 let
   # Vim plugins not packaged in nixpkgs, built straight from upstream.
@@ -148,7 +148,7 @@ in {
     kubebuilder
     kind
     kyverno-chainsaw
-    ocm-cli
+    pkgs-unstable.ocm-cli
   ];
 
   #-----------------------------------------------------------------------------
