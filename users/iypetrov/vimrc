@@ -154,6 +154,7 @@ function! s:fzf_backlinks()
     echom 'No backlinks found'
     return
   endif
+  lclose
   let entries = map(qflist, {_, e -> fnamemodify(bufname(e.bufnr), ':p')})
   call uniq(entries)
   call fzf#run(fzf#wrap({
