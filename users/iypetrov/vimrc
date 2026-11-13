@@ -203,7 +203,7 @@ let g:zettel_filename_sanitize = 1
 nmap <leader>zf :Fleet<CR>
 nmap <leader>zd :Daily<CR>
 nmap <leader>zp :ZettelNew<space>
-nmap <leader>zyy :ZettelYankName<CR>
+nmap <leader>zyy :ZettelYankName<CR>:let @+ = @"<CR>
 
 " vim-lsp
 let g:lsp_diagnostics_virtual_text_enabled = 1
