@@ -148,6 +148,13 @@
     '';
     deps = [];
   };
+  system.activationScripts.linkGitCrypt = {
+    text = ''
+      mkdir -p /usr/local/bin
+      ln -sf ${pkgs.git-crypt}/bin/git-crypt /usr/local/bin/git-crypt
+    '';
+    deps = [];
+  };
 
   # Leave at your first install's release.
   system.stateVersion = "26.05";

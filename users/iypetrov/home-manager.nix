@@ -264,7 +264,4 @@ in {
   # Runs an ssh-agent for the user session. Add keys with `ssh-add` (must be
   # copied into ~/.ssh on the VM first).
   services.ssh-agent.enable = true;
-  home.activation.linkGitCrypt = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    ln -sf ${pkgs.git-crypt}/bin/git-crypt /usr/local/bin/git-crypt
-  '';
 }
