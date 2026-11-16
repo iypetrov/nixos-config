@@ -85,6 +85,7 @@ in {
     gdu
     cri-tools
     brotli
+    git-crypt
 
     # Go
     go
