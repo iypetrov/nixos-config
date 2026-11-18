@@ -205,6 +205,7 @@ in {
       asyncomplete-vim
       asyncomplete-lsp-vim
       vim-go
+      vim-terraform
       vimwiki
       vim-zettel
     ]) ++ [
