@@ -70,6 +70,7 @@ in {
     perl
     lsof
     sqlite
+    zip
     unzip
 
     # Specific for me.
