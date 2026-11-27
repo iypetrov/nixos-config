@@ -87,7 +87,6 @@ in {
     cri-tools
     brotli
     git-crypt
-    chromium
 
     # Go
     go
